@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- Juegos -->
+
+        <div class="container">
+            <div class="row d-flex">
+                <div class="col-lg-10 d-flex flex-column">  
+                    <div class="d-flex flex-row w-100">
+                        <!-- Columna principal -->
+                        <div class="producto-imagen col-md-6 d-flex justify-content-left">
+                            <div class="galeria d-flex justify-content-center align-items-center">
+                                <div class="mb-4 ms-5 d-flex justify-content-left align-items-left" style="margin-top: 75px;">
+                                    <div class="carta" style="background: white; border: 3px solid black; width:450px; height: 450px;">
+                                        <div class="card-body">
+                                            <div id="carouselExampleCaptions" class="carousel slide w-100 h-100" data-bs-ride="carousel" style="width: 100%; height: 450px;">
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 450px;">
+                                                            <img src="{% static 'core/Imagenes/caratula/vf5.png' %}" class="d-block" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="Virtua00">
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 450px;">
+                                                            <img src="{% static 'core/Imagenes/galeria/Arcade/virtua.png' %}" class="d-block" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="Virtua01">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                        
+                        <div class="producto-info col-md-7 d-flex flex-column align-items-start p-3">
+                            <h4><strong>Virtua fighter 5</strong></h4>
+
+                            <!-- Plataforma -->
+                            <div class="w-100 py-2 border-bottom">
+                                <strong>Plataforma:</strong> XBOX 360
+                            </div>
+
+                            <!-- Precio -->
+                            <div class="w-100 py-2 border-bottom">
+                                <strong>Precio:</strong> $19.990 CLP
+                            </div>
+
+                            <!-- Cantidad y botón de añadir al carrito -->
+                            <div class="w-100 py-2 d-flex align-items-center">
+                                <label for="cantidad" class="me-2"><strong>Cantidad:</strong></label>
+                                <input type="number" id="cantidad" class="form-control me-3" style="width: 60px;" value="1" min="1">
+
+                                <button 
+                                class="btn btn-primary" 
+                                data-nombre="Virtua fighter 5" 
+                                data-descripcion="XBOX 360" 
+                                data-precio="19990"
+                                onclick="agregarAlCarritoDesdeHTML(this)">
+                                Agregar al carrito
+                                </button>
+                                
+                            </div>                            
+                        </div>                        
+                    </div>                
+
+                    <div class="producto-detalles container text-center w-100 mt-3">
+                        <!-- Pestañas de navegación -->
+                        <nav>
+                            <div class="nav nav-tabs justify-content-left" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-descripcion-tab" data-bs-toggle="tab" data-bs-target="#nav-descripcion" type="button" role="tab" aria-controls="nav-descripcion" aria-selected="true">Descripción</button>
+                                <button class="nav-link" id="nav-especificacion-tab" data-bs-toggle="tab" data-bs-target="#nav-especificacion" type="button" role="tab" aria-controls="nav-especificacion" aria-selected="false">Especificaciones</button>
+                            </div>
+                        </nav>
+                    
+                        <div class="tab-content" id="nav-tabContent">                        
+                            <!-- Pestaña Descripción -->
+                            <div class="tab-pane fade show active" id="nav-descripcion" role="tabpanel" aria-labelledby="nav-descripcion-tab" style="background: rgb(245, 180, 180); width: 100%; min-height: 750px; border-radius: 15px">
+                                <div class="video d-flex justify-content-center">
+                                    <!-- Video centrado -->
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/ElyyAanp5Fo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"  allowfullscreen></iframe>
+                                </div>                                   
+                                <p></p>
+                                <p class="text-center">¡El clásico de lucha que marcó un antes y un después en los videojuegos! Este título, 
+                                    desarrollado por Sega, ofrece combates intensos con un elenco diverso de personajes, 
+                                    cada uno con estilos de lucha únicos. Con gráficos impresionantes y mecánicas de juego 
+                                    refinadas, es una experiencia imprescindible para los amantes de los juegos de pelea. 
+                                    ¡Domina el arte del combate y demuestra tus habilidades en el ring virtual!</p>                           
+                            </div>
+                    
+                            <!-- Pestaña Especificaciones -->
+                            <div class="tab-pane fade" id="nav-especificacion" role="tabpanel" aria-labelledby="nav-especificacion-tab" style="background: rgb(245, 180, 180); width: 100%; min-height: 750px; border-radius: 15px">
+                                <div class="row">
+                                    <!-- Columna de requisitos mínimos -->
+                                    <div class="col-md-6">
+                                        <p></p>
+                                        <h3 style="margin-top: 10px;"><p class="text-center"><strong>Sin especificaciones.</strong></p></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>                    
+                </div>
+                
+                <!-- Columna lateral -->    
+                <div class="col-lg-2 d-flex justify-content-center align-items-start">                
+                    <div class="carta" style="background: rgb(245, 180, 180); width: 250px; height: 350px; border-radius: 15px; margin-top: 15px">                   
+                        <div class="contenido-barra-lateral d-flex justify-content-center align-items-center" style="height: 100%; border-radius: 25px">                      
+                            <div class="d-flex flex-column align-items-center">                          
+                                <div class="compra mb-4 text-center">                         
+                                    <img src="{% static 'core/Imagenes/iconos/comprasegura.png' %}" class="img-fluid mb-2" style="max-width: 50px;">                         
+                                    <p>Compra 100% segura y garantizada.</p>                          
+                                </div>                         
+                                <div class="atencion mb-4 text-center">                          
+                                    <img src="{% static 'core/Imagenes/iconos/soporte.png' %}" class="img-fluid mb-2" style="max-width: 50px;">                         
+                                    <p>Soporte Online y atención personalizada.</p>                          
+                                </div>                     
+                            </div>                  
+                        </div> 
+                        <hr class="lineaA">             
+                    </div>         
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

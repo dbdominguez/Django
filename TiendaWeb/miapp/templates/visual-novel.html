@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- Banner Categoria -->
+        <div class="separador container-fluid d-flex flex-column align-items-center p-3" style="background: rgb(245, 180, 180); border-radius: 50px;">
+            <div class="banner w-100 text-center">
+                <img src="{% static 'core/Imagenes/banner/bannerVN.png' %}" alt="banner" class="img-fluid rounded">
+            </div>
+        </div>
+
+        <hr class="lineaA">
+
+        <!-- Lista Juegos -->
+        <div class="container my-4">
+            <!-- Juego 1 -->
+            <div class="row align-items-center mb-3">
+                <div class="col-md-3 text-center">
+                    <img src="{% static 'core/Imagenes/caratula/AAT.png' %}" alt="Ace Attorney Trilogy: Apollo Justice" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h2>
+                        <a href="{% url 'AceAttorneyTriology' %}">Ace Attorney Trilogy: Apollo Justice</a>
+                    </h2>
+                    <p>Únete al abogado Apollo Justice y su mentor, el legendario Phoenix Wright, en esta colección de 3 juegos. Este título incluye 16 episodios (incluidos los que antes solo se conseguían como DLC) y está disponible en inglés, francés, alemán, japonés, coreano y chino tradicional y simplificado.</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <span class="precio d-block">$49.990</span>
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Agregar al carrito</button>
+                </div>
+            </div>
+        
+            <hr class="lineaB">
+        
+            <!-- Juego 2 -->
+            <div class="row align-items-center mt-3">
+                <div class="col-md-3 text-center">
+                    <img src="{% static 'core/Imagenes/caratula/danganv3.png' %}" alt="Danganronpa V3: Killing Harmony" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h2>
+                        <a href="{% url 'DanganronpaV3' %}">Danganronpa V3: Killing Harmony</a>
+                    </h2>
+                    <p>Un elenco nuevo de 16 personajes está atrapado en una escuela. Algunos matarán, otros morirán y otros recibirán un castigo. Dales una nueva mirada a los riesgos y la investigación dinámica mientras tratas de resolver casos retorcidos y condenar a muerte a tus nuevos amigos.</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <span class="precio d-block">$14.990</span>
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

@@ -1,0 +1,418 @@
+/* HEADER*/
+header {
+    background-color: #f9e1e1;
+    padding: 15px;
+    width: 100%;
+}
+
+
+/* BARRA SUPERIOR DE LA PAGINA */
+.barra-superior {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #8a3030;
+    border-radius: 50px;
+    padding: 5px;
+}
+
+.cont-izq {
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-left: 20px;
+}
+.cont-izq img{
+    margin-left: 10px;
+    width: 30px;
+    height: auto;
+}
+
+.cont-der {
+    display: flex;
+    margin-left: auto;
+    gap: 5px;
+}    
+.cont-der a{
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+/* ENCABEZADO DE LA PAGINA */
+.buscador .input-group {
+    width: 75%;
+}
+
+.buscador input {
+    width: 80%;
+}
+
+.buscador button {
+    width: 20%; 
+    border-radius: 25px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo img {
+    animation: fadeIn 0.8s ease-in-out;
+    height: auto;
+    max-height: 300px;
+    width: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.iconos img {
+    width: 60px;
+    height: auto;
+    margin: 5px;
+}
+
+@media (max-width: 768px) {
+    .logo img {
+        max-height: 80px;
+    }
+
+    .iconos img {
+        width: 35px;
+    }
+
+    .buscador input {
+        max-width: 250px;
+    }
+}
+
+
+/* Barra de Categorias */
+.categoria-img {
+    height: auto;
+    width: 275px;
+    transition: transform 0.2s ease;
+}
+
+.categoria-img:hover {
+    transform: scale(1.05); /* efecto suave al pasar el mouse */
+}
+
+/* Responsive para móviles */
+@media (max-width: 576px) {
+    .categoria-img {
+        width: 90px;
+    }
+}
+
+/* Separador */
+.lineaA {
+    border: none;
+    height: 4px;
+    background-color: rgb(38, 40, 75);
+    width: 100%;
+}
+
+.lineaB {
+    border: none;
+    height: 2px; 
+    background-color: rgb(95, 95, 95);
+    width: 100%;
+}
+
+/* Seccion Banner Categoria */
+.separador {
+    display:flex;
+    flex-direction: column;   
+    align-items: center;
+    background: rgb(245, 180, 180);
+    border-radius: 15px;
+    padding: 5px;    
+}
+
+.banner img{
+    height: 100%;
+    width: 100%;
+}
+
+
+/* BODY */
+body {
+    background: linear-gradient(135deg, #f9e1e1 40%, #ffffff 100%);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.contenedor-juegos { /* espacio de los juegos y los titulos de los juegos*/
+    padding: 20px;
+}
+
+
+/* ======= BOTONES ======= */
+.btn {
+    border-radius: 20px;
+    display:flex;
+        flex-direction: column;   
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+.btn-custom {
+    background: none;
+    border: none;
+    color: #007bff; /* Color base */
+    font-size: 16px;
+    transition: color 0.3s ease-in-out;
+}
+
+.btn-custom:hover {
+    color: #0056b3; /* Cambio de color al pasar el mouse */
+}
+
+.btn-custom:focus,
+.btn-custom:active {
+    outline: none;
+    box-shadow: none;
+}
+
+
+.btn-custom-primary {
+    background-color: #0066ff; /* Azul fuerte */
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-custom-primary:hover {
+    background-color: #004bcc; /* Azul más oscuro */
+}
+
+.btn-custom-secondary {
+    background-color: #6c757d; /* Gris */
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-custom-secondary:hover {
+    background-color: #565e64; /* Gris más oscuro */
+}
+
+.col-12.text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espaciado entre botones */
+}
+
+/* ======= TARJETAS ======= */
+.card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.category { /* espacio de los titulos de los juegos (dispensable, sin esto igual tiene formato)*/
+    margin-bottom: 20px;
+}
+
+.category h2 {  /* Titulos de los tipos de juegos (branja negra) */
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
+
+/* ==== JUEGOS ==== */
+/* Seccion Juego 1 */
+.juego-1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    align-items: center;
+}
+
+.info-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    width: 80%;
+}
+
+.compra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.precio {
+    padding: 5px;
+    font-size: x-large;
+    margin-right: 25px;
+}
+
+.juego-1 button{
+    border-radius: 5px;
+    width: 75px;
+    height: 25px;
+}
+/* Seccion Juego 2 */
+.juego-2 {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    align-items: center;
+}
+
+.info-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    width: 80%;
+}
+
+.compra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.precio {
+    padding: 5px;
+    font-size: x-large;
+    margin-right: 25px;
+}
+
+.juego-2 button{
+    border-radius: 5px;
+    width: 75px;
+    height: 25px;
+}
+
+
+/* PIE DE LA PAGINA */
+.barra-inferior {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background: #8a3030;
+    border-radius: 50px;
+    padding: 5px;
+}
+
+.inferior{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+.metodo-pago img {
+    margin-left: 10px;
+    width: 250px;
+    height: auto;
+}
+
+.horario {
+    margin-left: auto;
+    gap: 5px;  
+}
+
+.titulo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; 
+}
+
+.Formulario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    padding: 20px;
+    background: rgb(245, 180, 180);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: auto;
+}
+
+
+.text-outlinelight {
+    text-shadow: -1px -1px 0 black,  
+                  1px -1px 0 black,  
+                 -1px  1px 0 black,  
+                  1px  1px 0 black;
+}
+
+.text-outline {
+    text-shadow: -2px -2px 0 black, 2px -2px 0 black, 
+                 -2px  2px 0 black, 2px  2px 0 black,
+                 -2px  0px 0 black, 2px  0px 0 black,
+                  0px -2px 0 black, 0px  2px 0 black;
+}
+
+/* DETALLES CARRUSEL juegos*/
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: black;
+}
+
+.carrusel-container {
+    width: 100%; 
+    max-width: 450px;
+    height: auto;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 90%; 
+    object-fit: contain;
+}
+
+
+/* VIDEO */
+.video iframe {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+}
+
+/* PAGINA VIDEOJUEGO*/
+#nav-descripcion {
+    text-align: left;
+  }
+
+  #nav-especificacion {
+    text-align: left;
+  }
+
+.caption-bg {
+    background: rgba(0, 0, 0, 0.5); /* fondo negro con transparencia */
+    padding: 20px;
+    border-radius: 10px;
+}

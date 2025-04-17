@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- Banner Categoria -->
+        <div class="separador container-fluid d-flex flex-column align-items-center p-3" style="background: rgb(245, 180, 180); border-radius: 50px;">
+            <div class="banner w-100 text-center">
+                <img src="{% static 'core/Imagenes/banner/bannerDEP.png' %}" alt="banner" class="img-fluid rounded">
+            </div>
+        </div>
+
+        <hr class="lineaA">
+
+        <!-- Lista Juegos -->
+        <div class="container my-4">
+            <!-- Juego 1 -->
+            <div class="row align-items-center mb-3">
+                <div class="col-md-3 text-center">
+                    <img src="{% static 'core/Imagenes/caratula/MSBLF.png' %}" alt="Mario Strikers: Battle League" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h2>
+                        <a href="{% url 'MarioStrikers' %}">Mario Strikers: Battle League</a>
+                    </h2>
+                    <p>¡El fútbol más alocado regresa con Mario y sus amigos! Compite en intensos partidos de 5 contra 5 donde todo vale, usando movimientos especiales y equipamiento para personalizar tu estilo de juego. Juega en solitario, en línea o con amigos en este caótico y divertido arcade deportivo.</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <span class="precio d-block">$44.990</span>
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Agregar al carrito</button>
+                </div>
+            </div>
+        
+            <hr class="lineaB">
+        
+            <!-- Juego 2 -->
+            <div class="row align-items-center mt-3">
+                <div class="col-md-3 text-center">
+                    <img src="{% static 'core/Imagenes/caratula/NBA2k24.png' %}" alt="NBA 2K24" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h2>
+                        <a href="{% url 'NBA2K24' %}">NBA 2K24</a>
+                    </h2>
+                    <p>Vive la emoción del baloncesto con la entrega más realista de la saga NBA 2K. Disfruta de modos como Mi Carrera, Mi Equipo y la WNBA, con gráficos impresionantes y mecánicas de juego mejoradas. Con estrellas de la NBA, personalización profunda y experiencias competitivas en línea, NBA 2K24 es el juego definitivo para los fanáticos del básquetbol.</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <span class="precio d-block">$45.990</span>
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

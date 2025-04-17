@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- Banner Categoria -->
+        <div class="separador container-fluid d-flex flex-column align-items-center p-3" style="background: rgb(245, 180, 180); border-radius: 50px;">
+            <div class="banner w-100 text-center">
+                <img src="{% static 'core/Imagenes/banner/bannerSIM.png' %}" alt="banner" class="img-fluid rounded">
+            </div>
+        </div>
+
+        <hr class="lineaA">
+
+        <!-- Lista Juegos -->
+        <div class="container my-4">
+            <!-- Juego 1 -->
+            <div class="row align-items-center mb-3">
+                <div class="col-md-3 text-center">
+                    <img src="{% static 'core/Imagenes/caratula/SV.png' %}" alt="Stardew Valley" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h2>
+                        <a href="{% url 'StardewValley' %}">Stardew Valley</a>
+                    </h2>
+                    <p>Crea y gestiona tu propia granja en este relajante simulador de vida. Siembra, cultiva, pesca y forja relaciones con los habitantes del pueblo mientras exploras minas, enfrentas monstruos y vives una vida tranquila en el campo.</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <span class="precio d-block">$7.500</span>
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Agregar al carrito</button>
+                </div>
+            </div>
+        
+            <hr class="lineaB">
+        
+            <!-- Juego 2 -->
+            <div class="row align-items-center mt-3">
+                <div class="col-md-3 text-center">
+                    <img src="{% static 'core/Imagenes/caratula/MFS2024.png' %}" alt="Microsoft Flight Simulator 2024" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h2>
+                        <a href="{% url 'MicrosoftFlightSimulator' %}">Microsoft Flight Simulator 2024</a>
+                    </h2>
+                    <p>Experimenta el realismo definitivo en simulación de vuelo con Microsoft Flight Simulator 2024. Pilota una amplia variedad de aeronaves en un mundo hiperrealista con condiciones climáticas dinámicas, tráfico aéreo en tiempo real y misiones emocionantes.</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <span class="precio d-block">$51.990</span>
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- Juegos -->
+
+        <div class="container">
+            <div class="row d-flex">
+                <div class="col-lg-10 d-flex flex-column">  
+                    <div class="d-flex flex-row w-100">
+                        <!-- Columna principal -->
+                        <div class="producto-imagen col-md-6 d-flex justify-content-left">
+                            <div class="galeria d-flex justify-content-center align-items-center">
+                                <div class="mb-4 ms-5 d-flex justify-content-left align-items-left" style="margin-top: 75px;">
+                                    <div class="carta" style="background: white; border: 3px solid black; width:450px; height: 450px;">
+                                        <div class="card-body">
+                                            <div id="carouselExampleCaptions" class="carousel slide w-100 h-100" data-bs-ride="carousel" style="width: 100%; height: 450px;">
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 450px;">
+                                                            <img src="{% static 'core/Imagenes/caratula/age2.png' %}" class="d-block" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="Age00">
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 450px;">
+                                                            <img src="{% static 'core/Imagenes/galeria/AoE/01.png' %}" class="d-block" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="Age01">
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 450px;">
+                                                            <img src="{% static 'core/Imagenes/galeria/AoE/02.png' %}" class="d-block" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="Age02">
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 450px;">
+                                                            <img src="{% static 'core/Imagenes/galeria/AoE/03.png' %}" class="d-block" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="Age03">
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 450px;">
+                                                            <img src="{% static 'core/Imagenes/galeria/AoE/04.png' %}" class="d-block" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="Age04">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                        
+                        <div class="producto-info col-md-7 d-flex flex-column align-items-start p-3">
+                            <h4><strong>Age of Empires II: Definitive Edition</strong></h4>
+
+                            <!-- Plataforma -->
+                            <div class="w-100 py-2 border-bottom">
+                                <strong>Plataforma:</strong> PC (Steam)
+                            </div>
+
+                            <!-- Precio -->
+                            <div class="w-100 py-2 border-bottom">
+                                <strong>Precio:</strong> $15.990 CLP
+                            </div>
+
+                            <!-- Cantidad y botón de añadir al carrito -->
+                            <div class="w-100 py-2 d-flex align-items-center">
+                                <label for="cantidad" class="me-2"><strong>Cantidad:</strong></label>
+                                <input type="number" id="cantidad" class="form-control me-3" style="width: 60px;" value="1" min="1">
+
+
+                                <button 
+                                class="btn btn-primary" 
+                                data-nombre="Age of Empires II: Definitive Edition" 
+                                data-descripcion="Plataforma: PC (Steam)" 
+                                data-precio="44990"
+                                onclick="agregarAlCarritoDesdeHTML(this)">
+                                Agregar al carrito
+                                </button>
+
+                            </div>                            
+                        </div>                        
+                    </div>                
+
+                    <div class="producto-detalles container text-center w-100 mt-3">
+                        <!-- Pestañas de navegación -->
+                        <nav>
+                            <div class="nav nav-tabs justify-content-left" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-descripcion-tab" data-bs-toggle="tab" data-bs-target="#nav-descripcion" type="button" role="tab" aria-controls="nav-descripcion" aria-selected="true">Descripción</button>
+                                <button class="nav-link" id="nav-especificacion-tab" data-bs-toggle="tab" data-bs-target="#nav-especificacion" type="button" role="tab" aria-controls="nav-especificacion" aria-selected="false">Especificaciones</button>
+                            </div>
+                        </nav>
+                    
+                        <div class="tab-content" id="nav-tabContent">                        
+                            <!-- Pestaña Descripción -->
+                            <div class="tab-pane fade show active" id="nav-descripcion" role="tabpanel" aria-labelledby="nav-descripcion-tab" style="background: rgb(245, 180, 180); width: 100%; min-height: 750px; border-radius: 15px">
+                                <div class="video d-flex justify-content-center">
+                                    <!-- Video centrado -->
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/N6kd1SYHW5k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"  allowfullscreen></iframe>
+                                </div>                                   
+                                <p></p>
+                                <p class="text-center">Age of Empires II: Definitive Edition celebra el 20 aniversario de uno de los juegos de estrategia más populares de la historia, ahora con impresionantes gráficos 4K Ultra HD y una banda sonora 
+                                    totalmente remasterizada. Age of Empires II: DE presenta ""Los últimos khanes"" con 3 nuevas campañas y 4 nuevas Civilizaciones. Las actualizaciones frecuentes incluyen eventos, contenido adicional, nuevos modos de juego 
+                                    y características mejoradas con la reciente adición del modo cooperativo.</p>
+                                <p></p>
+                                <p class="text-center">Explora todas las campañas originales y las expansiones más vendidas como nunca antes. Con más de 200 horas de juego y 1,000 años de historia humana, te esperan experiencias mejoradas. Conéctate para 
+                                    desafiar a otros jugadores en tu búsqueda del dominio del mundo con 35 civilizaciones diferentes. ¡También puedes experimentar nuevas civilizaciones y campañas con el DLC de los Señores de Occidente! Las actualizaciones 
+                                    recientes incluyen un modo de juego Battle Royale, soporte continuo para el Editor de escenarios, Quick Play para juegos sociales fáciles, mejoras a la interfaz de usuario del juego y más.</p>
+                                <p></p>
+                                <p class="text-center">
+                                    Elige tu camino a la grandeza con una llamativa y atractiva remasterización de uno de los juegos de estrategia más queridos de todos los tiempos.</p>                  
+                            </div>
+                    
+                            <!-- Pestaña Especificaciones -->
+                            <div class="tab-pane fade" id="nav-especificacion" role="tabpanel" aria-labelledby="nav-especificacion-tab" style="background: rgb(245, 180, 180); width: 100%; min-height: 750px; border-radius: 15px">
+                                <div class="row">
+                                    <!-- Columna de requisitos mínimos -->
+                                    <div class="col-md-6">
+                                        <p></p>
+                                        <h4 style="margin-left: 10px;"><strong><u>Mínimo</u>:</strong></h4>
+                                        <ul>
+                                            <li><strong>SO:</strong>  Windows 10 64bit</li>
+                                            <li><strong>Procesador:</strong> Intel Core 2 Duo or AMD Athlon 64x2 5600+</li>
+                                            <li><strong>Memoria:</strong> 4 GB de RAM</li>
+                                            <li><strong>Gráficos:</strong> NVIDIA® GeForce® GT 420 or ATI™ Radeon™ HD 6850 or Intel® HD Graphics 4000 or better with 2 GB VRAM</li>
+                                            <li><strong>DirectX:</strong> Versión 11</li>
+                                            <li><strong>Red:</strong> Conexión de banda ancha a Internet</li>
+                                            <li><strong>Almacenamiento:</strong> 15 GB de espacio disponible</li>
+                                            <li><strong>Notas adicionales:</strong> 2GB of video memory + 4GB of system memory required</li>
+                                        </ul>
+                                    </div>
+                                
+                                    <!-- Columna de requisitos recomendados -->
+                                    <div class="col-md-6">
+                                        <p></p>
+                                        <h4 style="margin-left: 10px;"><strong><u>Recomendado:</u></strong></h4>
+                                        <ul>
+                                            <li><strong>SO:</strong>  Windows 10 64bit</li>
+                                            <li><strong>Procesador:</strong> 2.4 Ghz i5 or greater or AMD equivalent</li>
+                                            <li><strong>Memoria:</strong> 8 GB de RAM</li>
+                                            <li><strong>Gráficos:</strong> Nvidia® GTX 650 or AMD HD 5850 or better</li>
+                                            <li><strong>DirectX:</strong> Versión 11</li>
+                                            <li><strong>Red:</strong> Conexión de banda ancha a Internet</li>
+                                            <li><strong>Almacenamiento:</strong> 15 GB de espacio disponible</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>                    
+                </div>
+                
+                <!-- Columna lateral -->    
+                <div class="col-lg-2 d-flex justify-content-center align-items-start">                
+                    <div class="carta" style="background: rgb(245, 180, 180); width: 250px; height: 350px; border-radius: 15px; margin-top: 15px">                   
+                        <div class="contenido-barra-lateral d-flex justify-content-center align-items-center" style="height: 100%; border-radius: 25px">                      
+                            <div class="d-flex flex-column align-items-center">                          
+                                <div class="compra mb-4 text-center">                         
+                                    <img src="{% static 'core/Imagenes/iconos/comprasegura.png' %}" class="img-fluid mb-2" style="max-width: 50px;">                         
+                                    <p>Compra 100% segura y garantizada.</p>                          
+                                </div>                         
+                                <div class="atencion mb-4 text-center">                          
+                                    <img src="{% static 'core/Imagenes/iconos/soporte.png' %}" class="img-fluid mb-2" style="max-width: 50px;">                         
+                                    <p>Soporte Online y atención personalizada.</p>                          
+                                </div>                     
+                            </div>                  
+                        </div> 
+                        <hr class="lineaA">             
+                    </div>         
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

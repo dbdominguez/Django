@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Botón para abrir el modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalRecuperarContrasena">
+        Recuperar Contraseña
+    </button>
+
+    <!-- Modal Recuperar Contraseña -->
+    <div class="modal fade" id="ModalRecuperarContrasena" tabindex="-1" aria-labelledby="recuperarContrasenaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Título del modal -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="recuperarContrasenaLabel">Recuperar Contraseña</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <!-- Cuerpo del modal -->
+                <div class="modal-body">
+                    <form class="row g-3 needs-validation p-4 border rounded shadow" id="FormularioRecuperar" novalidate>
+                        <!-- Título del formulario -->
+                        <div class="col-12 text-center">
+                            <h2 class="mb-4">RECUPERAR CONTRASEÑA</h2>
+                        </div>
+                        
+                        <!-- Correo -->
+                        <div class="col-md-12">
+                            <label for="recuperarEmail" class="form-label">Correo Electrónico</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">@</span>
+                                <input type="email" class="form-control" id="recuperarEmail" placeholder="ejemplo@correo.com" required>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese un correo válido.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Nueva Contraseña -->
+                        <div class="col-md-6">
+                            <label for="nuevaPassword" class="form-label">Nueva Contraseña</label>
+                            <input type="password" class="form-control" id="nuevaPassword" placeholder="Ingrese nueva contraseña" required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese una nueva contraseña.
+                            </div>
+                        </div>
+                        
+                        <!-- Confirmar Nueva Contraseña -->
+                        <div class="col-md-6">
+                            <label for="confirmarPassword" class="form-label">Confirmar Contraseña</label>
+                            <input type="password" class="form-control" id="confirmarPassword" placeholder="Confirme su contraseña" required>
+                            <div class="invalid-feedback">
+                                Por favor confirme su contraseña.
+                            </div>
+                        </div>
+                        
+                        <!-- Aceptar términos -->
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="aceptarTerminos" required>
+                                <label class="form-check-label" for="aceptarTerminos">
+                                    Acepto los términos y condiciones.
+                                </label>
+                                <div class="invalid-feedback">
+                                    Debes aceptar los términos y condiciones.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Botones -->
+                        <div class="col-12 d-flex justify-content-center gap-3">
+                            <button class="btn btn-primary w-25" type="submit">Enviar</button>    
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin del modal de recuperación de contraseña -->
+
+        <!-- Modal de Inicio de Sesión -->
+        <div class="modal fade" id="ModalInicioSecion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Inicio de Sesión</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="FormularioInicio">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo Electrónico:</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña:</label>
+                                <input type="password" class="form-control" id="password" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="role" class="form-label">Selecciona tu rol:</label>
+                                <select class="form-control" id="role" required>
+                                    <option value="admin">Administrador</option>
+                                    <option value="cliente">Cliente</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

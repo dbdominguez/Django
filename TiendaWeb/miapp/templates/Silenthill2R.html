@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- Juegos -->
+
+        <div class="container">
+            <div class="row d-flex">
+                <div class="col-lg-10 d-flex flex-column">  
+                    <div class="d-flex flex-row w-100">
+                        <!-- Columna principal -->
+                        <div class="producto-imagen col-md-6 d-flex justify-content-left">
+                            <div class="galeria d-flex justify-content-center align-items-center">
+                                <div class="mb-4 ms-5 d-flex justify-content-left align-items-left" style="margin-top: 75px;">
+                                    <div class="carta" style="background: white; border: 3px solid black; width:450px; height: 450px;">
+                                        <div class="card-body">
+                                            <div id="carouselExampleCaptions" class="carousel slide w-100 h-100" data-bs-ride="carousel" style="width: 100%; height: 450px;">
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 450px;">
+                                                            <img src="{% static 'core/Imagenes/caratula/sh2r.png' %}" class="d-block" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="SH200">
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 450px;">
+                                                            <img src="{% static 'core/Imagenes/galeria/SH2/01.png' %}" class="d-block" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="SH201">
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 450px;">
+                                                            <img src="{% static 'core/Imagenes/galeria/SH2/02.png' %}" class="d-block" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="SH202">
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 450px;">
+                                                            <img src="{% static 'core/Imagenes/galeria/SH2/03.png' %}" class="d-block" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="SH203">
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 450px;">
+                                                            <img src="{% static 'core/Imagenes/galeria/SH2/04.png' %}" class="d-block" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="SH204">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                        
+                        <div class="producto-info col-md-7 d-flex flex-column align-items-start p-3">
+                            <h4><strong>Silent Hill 2: Remake</strong></h4>
+
+                            <!-- Plataforma -->
+                            <div class="w-100 py-2 border-bottom">
+                                <strong>Plataforma:</strong> PC (Steam)
+                            </div>
+
+                            <!-- Precio -->
+                            <div class="w-100 py-2 border-bottom">
+                                <strong>Precio:</strong> $46.990 CLP
+                            </div>
+
+                            <!-- Cantidad y botón de añadir al carrito -->
+                            <div class="w-100 py-2 d-flex align-items-center">
+                                <label for="cantidad" class="me-2"><strong>Cantidad:</strong></label>
+                                <input type="number" id="cantidad" class="form-control me-3" style="width: 60px;" value="1" min="1">
+                                <button 
+                                    class="btn btn-primary" 
+                                    data-nombre="Silent Hill 2: Remake" 
+                                    data-descripcion="Plataforma: PC (Steam)" 
+                                    data-precio="46990"
+                                    onclick="agregarAlCarritoDesdeHTML(this)">
+                                    Agregar al carrito
+                                    </button>
+                            </div>                            
+                        </div>                        
+                    </div>                
+
+                    <div class="producto-detalles container text-center w-100 mt-3">
+                        <!-- Pestañas de navegación -->
+                        <nav>
+                            <div class="nav nav-tabs justify-content-left" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-descripcion-tab" data-bs-toggle="tab" data-bs-target="#nav-descripcion" type="button" role="tab" aria-controls="nav-descripcion" aria-selected="true">Descripción</button>
+                                <button class="nav-link" id="nav-especificacion-tab" data-bs-toggle="tab" data-bs-target="#nav-especificacion" type="button" role="tab" aria-controls="nav-especificacion" aria-selected="false">Especificaciones</button>
+                            </div>
+                        </nav>
+                    
+                        <div class="tab-content" id="nav-tabContent">                        
+                            <!-- Pestaña Descripción -->
+                            <div class="tab-pane fade show active" id="nav-descripcion" role="tabpanel" aria-labelledby="nav-descripcion-tab" style="background: rgb(245, 180, 180); width: 100%; min-height: 750px; border-radius: 15px">
+                                <div class="video d-flex justify-content-center">
+                                    <!-- Video centrado -->
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/1WEw7jec_mc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"  allowfullscreen></iframe>
+                                </div>                                   
+                                <p></p>
+                                <p class="text-center">Después de recibir una carta de su difunta esposa,
+                                    James se dirige al lugar donde habían compartido tantos recuerdos juntos,
+                                    con la esperanza de verla una vez más: Silent Hill.
+                                    Allí, junto al lago, se encuentra con una mujer siniestramente similar a ella...</p>
+                                <p></p>
+                                <h5><p class="text-center"><strong>«Me llamo... Maria», sonríe la mujer. Su rostro, su voz... Es igual a ella.</strong></p></h5>
+                                <p></p>
+                                <p class="text-center">Experimenta un clase magistral de terror de psicológica, aclamado como el mejor de su serie, 
+                                    con la última tecnología en imágenes escalofriantes y sonidos viscerales.</p>
+                                <p></p>                                
+                                <ul>
+                                    <li><strong>Gráficos y sonido de alta calidad:</strong> El mundo de SILENT HILL y su entorno inquietante es aún más real que antes gracias al trazado de rayos y otras mejoras técnicas de vanguardia.
+                                        Gracias a la inclusión de espacios sonoros nuevos e inmersivos, sentirás que estás en medio de la acción.</li>
+                                    <li><strong>Entornos más grandes:</strong> Explora ubicaciones y edificios que antes eran inaccesibles o que se agregaron en la nueva versión.
+                                        Disfruta de la misma historia aclamada, incluso si ves el pueblo de Silent Hill por primera vez en el mapa expandido.</li>
+                                    <li><strong>Cámara al hombro:</strong> La nueva versión cambia los puntos de vista de cámara fija del original por una perspectiva de cámara al hombro y te acerca a lo que ve James para generar una 
+                                        experiencia más inmersiva y emocionante mientras exploras el pueblo y te enfrentas a los monstruos.</li>
+                                    <li><strong>Mecánicas de combate evolucionadas:</strong> Encontrarás armas conocidas como el tubo de acero y la pistola, pero con un sistema de combate actualizado.
+                                        Esquiva en el momento justo para evitar los ataques, apunta con la mira y más en encuentros con monstruos más atrapantes y perturbadores que nunca.</li>                                     
+                                </ul>
+                                                       
+                            </div>
+                    
+                            <!-- Pestaña Especificaciones -->
+                            <div class="tab-pane fade" id="nav-especificacion" role="tabpanel" aria-labelledby="nav-especificacion-tab" style="background: rgb(245, 180, 180); width: 100%; min-height: 750px; border-radius: 15px">
+                                <div class="row">
+                                    <!-- Columna de requisitos mínimos -->
+                                    <div class="col-md-6">
+                                        <p></p>
+                                        <h4 style="margin-left: 10px;"><strong><u>Mínimo:</u></strong></h4>
+                                        <ul>
+                                            <li>Requiere un procesador y un sistema operativo de 64 bits</li>
+                                            <li><strong>SO:</strong> Windows 10 x64</li>
+                                            <li><strong>Procesador:</strong> Intel Core i7-6700K | AMD Ryzen 5 3600</li>
+                                            <li><strong>Memoria:</strong> 16 GB de RAM</li>
+                                            <li><strong>Gráficos:</strong>  NVIDIA® GeForce® GTX 1070 Ti or AMD Radeon™ RX 5700 or Intel® Arc™ A750</li>
+                                            <li><strong>DirectX:</strong> Versión 12</li>
+                                            <li><strong>Almacenamiento:</strong> 50 GB de espacio disponible</li>
+                                            <li><strong>Tarjeta de sonido:</strong> Windows Compatible Audio Device.</li>
+                                        </ul>
+                                    </div>
+                                
+                                    <!-- Columna de requisitos recomendados -->
+                                    <div class="col-md-6">
+                                        <p></p>
+                                        <h4 style="margin-left: 10px;"><strong><u>Recomendado:</u></strong></h4>
+                                        <ul>
+                                            <li>Requiere un procesador y un sistema operativo de 64 bits</li>
+                                            <li><strong>SO:</strong> Windows 10 x64</li>
+                                            <li><strong>Procesador:</strong> Intel Core i7-8700K | AMD Ryzen 5 3600X</li>
+                                            <li><strong>Memoria:</strong> 16 GB de RAM</li>
+                                            <li><strong>Gráficos:</strong> NVIDIA® GeForce® 2080RTX or AMD Radeon™ 6800XT</li>
+                                            <li><strong>DirectX:</strong> Versión 12</li>
+                                            <li><strong>Almacenamiento:</strong> 50 GB de espacio disponible</li>
+                                            <li><strong>Tarjeta de sonido:</strong> Windows Compatible Audio Device.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>                    
+                </div>
+                
+                <!-- Columna lateral -->    
+                <div class="col-lg-2 d-flex justify-content-center align-items-start">                
+                    <div class="carta" style="background: rgb(245, 180, 180); width: 250px; height: 350px; border-radius: 15px; margin-top: 15px">                   
+                        <div class="contenido-barra-lateral d-flex justify-content-center align-items-center" style="height: 100%; border-radius: 25px">                      
+                            <div class="d-flex flex-column align-items-center">                          
+                                <div class="compra mb-4 text-center">                         
+                                    <img src="{% static 'core/Imagenes/iconos/comprasegura.png' %}" class="img-fluid mb-2" style="max-width: 50px;">                         
+                                    <p>Compra 100% segura y garantizada.</p>                          
+                                </div>                         
+                                <div class="atencion mb-4 text-center">                          
+                                    <img src="{% static 'core/Imagenes/iconos/soporte.png' %}" class="img-fluid mb-2" style="max-width: 50px;">                         
+                                    <p>Soporte Online y atención personalizada.</p>                          
+                                </div>                     
+                            </div>                  
+                        </div> 
+                        <hr class="lineaA">             
+                    </div>         
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

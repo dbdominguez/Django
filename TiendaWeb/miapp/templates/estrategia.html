@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- Banner Categoria -->
+        <div class="separador container-fluid d-flex flex-column align-items-center p-3" style="background: rgb(245, 180, 180); border-radius: 50px;">
+            <div class="banner w-100 text-center">
+                <img src="{% static 'core/Imagenes/banner/bannerEST.png' %}" alt="banner" class="img-fluid rounded">
+            </div>
+        </div>
+
+        <hr class="lineaA">
+
+        <!-- Lista Juegos -->
+        <div class="container my-4">
+            <!-- Juego 1 -->
+            <div class="row align-items-center mb-3">
+                <div class="col-md-3 text-center">
+                    <img src="{% static 'core/Imagenes/caratula/age2.png' %}" alt="Age of Empires II: Definitive Edition" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h2>
+                        <a href="{% url 'AoE2D' %}">Age of Empires II: Definitive Edition</a>
+                    </h2>
+                    <p>¡Revive la historia y construye tu imperio! Este juego de estrategia en tiempo real te lleva a través de las épocas, permitiéndote 
+                        liderar civilizaciones icónicas, librar batallas épicas y tomar decisiones que cambiarán el curso de la historia. Con campañas 
+                        emocionantes y una jugabilidad profunda, es perfecto para los amantes de la estrategia. ¡El destino de tu imperio está en tus manos!</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <span class="precio d-block">$15.990</span>
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Agregar al carrito</button>
+                </div>
+            </div>
+        
+            <hr class="lineaB">
+        
+            <!-- Juego 2 -->
+            <div class="row align-items-center mt-3">
+                <div class="col-md-3 text-center">
+                    <img src="{% static 'core/Imagenes/caratula/civVI.png' %}" alt="Civilization VI" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h2>
+                        <a href="{% url 'CivilizationVI' %}">Civilization VI</a>
+                    </h2>
+                    <p>¡Da forma al mundo como un verdadero líder! Este aclamado juego de estrategia por turnos te permite construir y expandir tu civilización 
+                        desde los albores de la humanidad hasta la era moderna. Toma decisiones cruciales, negocia con líderes históricos y asegura tu lugar 
+                        en la historia. Con mapas dinámicos y un sinfín de posibilidades, cada partida es una experiencia única. 
+                        ¡El destino de tu civilización está en tus manos!</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <span class="precio d-block">$4.990</span>
+                    <button type="submit" class="btn btn-primary btn-sm mt-2">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+
+
+{% endblock %}
