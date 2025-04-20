@@ -9,9 +9,12 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+
 import os
 from decouple import config
 from pathlib import Path
+
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -75,20 +78,14 @@ WSGI_APPLICATION = 'TiendaWeb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-import os
-import oracledb
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(_file_)))
-
-
-oracledb.init_oracle_client(config_dir=os.path.join(BASE_DIR, "oracle_wallet"))
+from .oracle_init import *
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'localhost/XEPDB1',
-        'USER': 'django2',
-        'PASSWORD': 'Djangouser123',
+        'NAME': 'bddjango_high',
+        'USER': 'django_user',
+        'PASSWORD': 'Userdjango123',
     }
 }
 
