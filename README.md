@@ -1,1 +1,1 @@
-Por completar
+Descarguen el Oracle Instant Client Version 23.7.0.25.01 Basic Package (asegurense que la vr de python sea la misma que del cliente -x64 o x32-) y el contenido coloquenlo dentro de la carpeta TiendaWeb (la que engloba todo menos el README)
