@@ -75,15 +75,35 @@ WSGI_APPLICATION = 'TiendaWeb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+import os
+import oracledb
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(_file_)))
+
+
+oracledb.init_oracle_client(config_dir=os.path.join(BASE_DIR, "oracle_wallet"))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
+<<<<<<< HEAD
         'NAME': 'localhost/XEPDB1',
         'USER': 'django2',
         'PASSWORD': 'Djangouser123',
     }
 }
 
+=======
+        'NAME': 'mau5pjo0jdegsm0a_high',  
+        'USER': 'ADMIN',
+        'PASSWORD': 'Programacionweb2025',
+        'OPTIONS': {
+            'wallet_location': os.path.join(BASE_DIR, 'oracle_wallet'),
+            'ssl_server_dn_match': True,
+        },
+    }
+}
+>>>>>>> 9f5cdc7698de6e25a3d1046d58d8e176e0194ed7
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
