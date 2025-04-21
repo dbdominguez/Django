@@ -39,7 +39,7 @@ class RegistroUsuarioForm(forms.ModelForm):
 
     class Meta:
         model = Usuario
-        fields = ['correo', 'nombre', 'apellido', 'telefono', 'direccion', 'password']
+        fields = ['nombre', 'apellido', 'correo', 'direccion', 'telefono', 'password']
 
     def save(self, commit=True):
         usuario = super().save(commit=False)
