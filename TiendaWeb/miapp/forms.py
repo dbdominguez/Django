@@ -29,8 +29,9 @@ class RegistroUsuarioForm(UserCreationForm):
 #EDITADO
 import re
 from django import forms
-from .models import Usuario
+from .models import Usuario, Producto, Rol
 from django.core.exceptions import ValidationError
+from django.contrib.auth.hashers import make_password
 
 class RegistroUsuarioForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -38,9 +39,21 @@ class RegistroUsuarioForm(forms.ModelForm):
 
     class Meta:
         model = Usuario
-        fields = ['correo', 'password']
+        fields = ['correo', 'nombre', 'apellido', 'telefono', 'direccion', 'password']
 
-    def clean_password1(self):
+    def save(self, commit=True):
+        usuario = super().save(commit=False)
+        usuario.password = make_password(self.cleaned_data['password'])
+
+        # Asignar rol por defecto (por ejemplo, "Cliente")
+        rol_cliente = Rol.objects.get(nombre="Cliente")
+        usuario.rol = rol_cliente
+
+        if commit:
+            usuario.save()
+        return usuario
+
+    def clean_password(self):
         password = self.cleaned_data.get("password")
         # Validaciones de seguridad
         if len(password) < 8:
@@ -59,4 +72,10 @@ class RegistroUsuarioForm(forms.ModelForm):
         confirmar = cleaned_data.get("confirmar_password")
 
         if password and confirmar and password != confirmar:
-            raise ValidationError("Las contraseñas no coinciden.")    
+            raise ValidationError("Las contraseñas no coinciden.")
+
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['nombre', 'descripcion', 'precio', 'stock', 'imagen_url', 'plataforma', 'categoria']    

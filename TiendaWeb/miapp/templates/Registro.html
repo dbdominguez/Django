@@ -3,8 +3,9 @@
 
 {% block content %}
 
-<!--Registro de usuario-->
+<!-- Registro de usuario -->
 <form class="row g-3 needs-validation p-4 border rounded shadow" novalidate>
+    {% csrf_token %}
     <div class="col-12 text-center">
         <h2 class="mb-4">REGISTRO</h2>
     </div>
@@ -105,15 +106,35 @@
             </div>
         </div>
     </div>
+
     <div class="col-12 text-center mt-4">
-        <button class="btn btn-custom-primary me-2" type="submit"
-    
-        
-        >Registrar</button>
+        <button class="btn btn-custom-primary me-2" type="submit">Registrar</button>
         <button class="btn btn-custom-secondary" type="reset">Limpiar</button>
     </div>
-    
 </form>
+
+<script>
+    // Habilitar validación de Bootstrap al enviar el formulario
+    (function () {
+        'use strict'
+        window.addEventListener('load', function () {
+            // Obtener todos los formularios que contienen la clase 'needs-validation'
+            var forms = document.querySelectorAll('.needs-validation');
+            // Iterar sobre los formularios
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        // Si el formulario no es válido, evitar el envío
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+        }, false);
+    })();
+</script>
 <!-- Fin del registro de usuario-->
 
 {% endblock %}

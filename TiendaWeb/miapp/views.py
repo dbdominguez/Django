@@ -1,9 +1,10 @@
 from django.core.mail import send_mail
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from .models import Usuario
-from .forms import RegistroUsuarioForm
+from .models import Usuario, Producto
+from .forms import RegistroUsuarioForm, ProductoForm
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 def registro_usuario(request):
     if request.method == 'POST':
@@ -20,12 +21,18 @@ def login_usuario(request):
         correo = request.POST.get('correo')
         password = request.POST.get('password')
         user = authenticate(request, correo=correo, password=password)
-        if user:
+        if user is not None:
             login(request, user)
-            return redirect('Index')
+            # Redireccionar según el rol
+            if user.rol.nombre == "Administrador":
+                return redirect('PerfilAdmin') 
+            else:
+                return redirect('Perfil')
         else:
-            return render(request, 'login.html', {'error': 'Credenciales inválidas'})
-    return render(request, 'login.html')
+            messages.error(request, "Correo o contraseña inválidos.")
+            return redirect('Index')
+    else:
+        return redirect('Index')
 
 def logout_usuario(request):
     logout(request)
@@ -36,11 +43,22 @@ def recuperar_contrasena(request):
         correo = request.POST.get('correo')
         Usuario = get_user_model()
         try:
-            usuario = Usuario.objects.get(correo=correo)
+            Usuario = Usuario.objects.get(correo=correo)
             messages.success(request, f'Se ha enviado un enlace de recuperación a {correo}.')
         except Usuario.DoesNotExist:
             messages.error(request, 'El correo ingresado no está registrado.')
-        return redirect('Index') 
+        return redirect('Index')
+
+def solo_admins(user):
+    return user.is_authenticated and user.rol.nombre == "Administrador"
+
+
+def agregar_al_carro(request, producto_id):
+    producto = get_object_or_404(Producto, pk=producto_id)
+    carro = request.session.get('carrito', {})
+    carro[str(producto_id)] = carro.get(str(producto_id), 0) + 1
+    request.session['carro'] = carro
+    return redirect('carro')
     
 # General.
 def inicio(request):
@@ -49,6 +67,7 @@ def inicio(request):
 def Registro(request):
     return render(request, "Registro.html")
 
+@login_required
 def Perfil(request):
     return render(request, "Perfil.html")
 
@@ -124,12 +143,19 @@ def PacManMuseum(request):
 
 
 
-# ADMIN 
+# ADMIN
+@login_required
+@user_passes_test(solo_admins)
+def PerfilAdmin(request):
+    return render(request, "PerfilAdmin.html")
+
+
+# USUARIOS 
 @login_required
 @user_passes_test(solo_admins)
 def listar_usuarios(request):
     usuarios = Usuario.objects.all()
-    return render(request, 'usuarios/listar.html', {'usuarios': usuarios})
+    return render(request, 'listar_usuarios.html', {'usuarios': usuarios})
 
 @login_required
 @user_passes_test(solo_admins)
@@ -141,7 +167,7 @@ def crear_usuario(request):
             return redirect('listar_usuarios')
     else:
         form = UsuarioForm()
-    return render(request, 'usuarios/crear.html', {'form': form})
+    return render(request, 'formulario_usuarios.html', {'form': form})
 
 @login_required
 @user_passes_test(solo_admins)
@@ -154,7 +180,7 @@ def editar_usuario(request, id):
             return redirect('listar_usuarios')
     else:
         form = UsuarioForm(instance=usuario)
-    return render(request, 'usuarios/editar.html', {'form': form})
+    return render(request, 'formulario_usuarios.html', {'form': form})
 
 @login_required
 @user_passes_test(solo_admins)
@@ -162,3 +188,43 @@ def eliminar_usuario(request, id):
     usuario = get_object_or_404(Usuario, id=id)
     usuario.delete()
     return redirect('listar_usuarios')
+
+
+# PRODUCTOS
+@login_required
+@user_passes_test(solo_admins)
+def listar_productos(request):
+    productos = Producto.objects.all()
+    return render(request, 'listar_productos.html', {'productos': productos})
+
+@login_required
+@user_passes_test(solo_admins)
+def crear_producto(request):
+    if request.method == 'POST':
+        form = ProductoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_productos')
+    else:
+        form = ProductoForm()
+    return render(request, 'formulario_producto.html', {'form': form})
+
+@login_required
+@user_passes_test(solo_admins)
+def editar_producto(request, id):
+    producto = get_object_or_404(Producto, id_producto=id)
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_productos')
+    else:
+        form = ProductoForm(instance=producto)
+    return render(request, 'formulario_producto.html', {'form': form})
+
+@login_required
+@user_passes_test(solo_admins)
+def eliminar_producto(request, id):
+    producto = get_object_or_404(Producto, id_producto=id)
+    producto.delete()
+    return redirect('listar_productos')

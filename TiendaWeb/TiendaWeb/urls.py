@@ -25,9 +25,7 @@ urlpatterns = [
     path('Perfil/', views.Perfil, name='Perfil'),
 
     path('Carro/', views.Carro, name='Carro'),
-    path('agregar/<int:producto_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
-    path('comprar/', views.procesar_compra, name='procesar_compra'),
-    path('historial/', views.historial_compras, name='historial_compras'),
+    path('agregar/<int:producto_id>/', views.agregar_al_carro, name='agregar_al_carro'),
 
     path('login/', views.login_usuario, name='login'),
     path('logout/', views.logout_usuario, name='logout'),
@@ -39,7 +37,7 @@ urlpatterns = [
     path('rol/', views.rol, name='rol'),
     path('estrategia/', views.estrategia, name='estrategia'),
     path('deporte/', views.deporte, name='deporte'),
-    path('arcade-clasicos/', views.visualnovel, name='arcade-clasicos'),
+    path('arcade-clasicos/', views.arcadeclasicos, name='arcade-clasicos'),
 
     path('DanganronpaV3/', views.DanganronpaV3, name='DanganronpaV3'),
     path('AceAttorneyTriology/', views.AceAttorneyTriology, name='AceAttorneyTriology'),
@@ -57,4 +55,15 @@ urlpatterns = [
     path('PacManMuseum/', views.PacManMuseum, name='PacManMuseum'),
 
     path('admin/', admin.site.urls),
+
+    path('admin/usuarios/', views.listar_usuarios, name='listar_usuarios'),
+    path('admin/usuarios/crear/', views.crear_usuario, name='crear_usuarios'),
+    path('admin/usuarios/editar/<int:id>/', views.editar_usuario, name='editar_usuarios'),
+    path('admin/usuarios/eliminar/<int:id>/', views.eliminar_usuario, name='eliminar_usuarios'),
+
+
+    path('admin/productos/', views.listar_productos, name='listar_productos'),
+    path('admin/productos/crear/', views.crear_producto, name='crear_producto'),
+    path('admin/productos/editar/<int:id>/', views.editar_producto, name='editar_producto'),
+    path('admin/productos/eliminar/<int:id>/', views.eliminar_producto, name='eliminar_producto'),
 ]

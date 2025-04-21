@@ -80,12 +80,15 @@ WSGI_APPLICATION = 'TiendaWeb.wsgi.application'
 
 from .oracle_init import *
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'bddjango_high',
         'USER': 'django_user',
         'PASSWORD': 'Userdjango123',
+        'wallet_location': os.path.join(BASE_DIR, 'Wallet'),
     }
 }
 
@@ -128,10 +131,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "miapp/static")
+    os.path.join(BASE_DIR, 'miapp', 'static', 'core'),
 ]
 
 # Default primary key field type

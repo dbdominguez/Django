@@ -23,7 +23,10 @@
                         <button class="btn btn-secondary" data-bs-toggle="collapse" href="#editProfile" role="button" aria-expanded="false" aria-controls="editProfile">
                             Editar Perfil
                         </button>
-                        <button id="logout" class="btn btn-danger">Cerrar Sesión</button>
+                        <form method="POST" action="{% url 'logout' %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+                        </form>
 
                         <!-- Formulario de Edición de Perfil -->
                         <div class="collapse mt-3" id="editProfile">

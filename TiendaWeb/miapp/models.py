@@ -38,7 +38,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     id_usuario = models.AutoField(primary_key=True, db_column='ID_USUARIO')
     nombre = models.CharField(max_length=100, db_column='NOMBRE', null=True)
     apellido = models.CharField(max_length=100, db_column='APELLIDO', null=True)
-    rol = models.ForeignKey('MAIN_Rol', on_delete=models.PROTECT, db_column='ID_ROL')
+    rol = models.ForeignKey('Rol', on_delete=models.PROTECT, db_column='ID_ROL')
     correo = models.EmailField(unique=True, db_column='CORREO')
     direccion = models.CharField(max_length=255, db_column='DIRECCION', null=True, blank=True)
     telefono = models.CharField(max_length=20, db_column='TELEFONO', null=True, blank=True)
