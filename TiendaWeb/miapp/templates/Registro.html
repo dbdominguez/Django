@@ -46,13 +46,13 @@
 
     <div class="col-md-6">
         <label for="password1" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="password1" name="password" placeholder="Ingrese su contraseña" required>
+        <input type="password" name="password1" id="password1" required>
         <div class="invalid-feedback" id="passwordError">Por favor ingrese una contraseña.</div>
     </div>
 
     <div class="col-md-6">
         <label for="password2" class="form-label">Confirmar Contraseña</label>
-        <input type="password" class="form-control" id="password2" name="password2" placeholder="Repita su contraseña" required>
+        <input type="password" name="password2" id="password2" required>
         <div class="invalid-feedback">Por favor confirme su contraseña.</div>
     </div>
 
@@ -93,6 +93,12 @@
         <button class="btn btn-custom-secondary" type="reset">Limpiar</button>
     </div>
 </form>
+
+{% if form.errors %}
+    <div class="alert alert-danger">
+        {{ form.errors }}
+    </div>
+{% endif %}
 <!-- Fin del registro de usuario-->
 
 <script>
