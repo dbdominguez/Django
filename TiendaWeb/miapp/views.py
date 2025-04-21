@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from .models import Usuario, Producto
-from .forms import RegistroUsuarioForm, ProductoForm
+from .forms import RegistroUsuarioForm, ProductoForm, PerfilUsuarioForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 def Registro(request):
@@ -74,7 +74,20 @@ def registro_usuario(request):
 
 @login_required
 def Perfil(request):
-    return render(request, "Perfil.html")
+    usuario = request.user
+
+    if request.method == 'POST':
+        form = PerfilUsuarioForm(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            return redirect('Perfil')
+    else:
+        form = PerfilUsuarioForm(instance=usuario)
+
+    return render(request, "Perfil.html", {
+        'form': form,
+        'usuario': usuario
+    })
 
 def Carro(request):
     return render(request, "Carro.html")

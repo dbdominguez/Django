@@ -65,6 +65,10 @@ class RegistroUsuarioForm(UserCreationForm):
                 raise forms.ValidationError("Debe contener al menos un carácter especial.")
 
 
+class PerfilUsuarioForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['nombre', 'correo', 'direccion', 'telefono']
 
 class ProductoForm(forms.ModelForm):
     class Meta:
