@@ -23,7 +23,15 @@ urlpatterns = [
     path('Index/', views.inicio, name='Index'),
     path('Registro/', views.Registro, name='Registro'),
     path('Perfil/', views.Perfil, name='Perfil'),
+
     path('Carro/', views.Carro, name='Carro'),
+    path('agregar/<int:producto_id>/', views.agregar_al_carrito, name='agregar_al_carrito'),
+    path('comprar/', views.procesar_compra, name='procesar_compra'),
+    path('historial/', views.historial_compras, name='historial_compras'),
+
+    path('login/', views.login_usuario, name='login'),
+    path('logout/', views.logout_usuario, name='logout'),
+    path('recuperar-contrasena/', views.recuperar_contrasena, name='recuperar_contrasena'),
 
     path('visual-novel/', views.visualnovel, name='visual-novel'),
     path('survival-horror/', views.survivalhorror, name='survival-horror'),

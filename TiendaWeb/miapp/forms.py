@@ -27,16 +27,21 @@ class RegistroUsuarioForm(UserCreationForm):
 '''
 
 #EDITADO
+import re
 from django import forms
-from django.contrib.auth.models import User
+from .models import Usuario
+from django.core.exceptions import ValidationError
 
 class RegistroUsuarioForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    confirmar_password = forms.CharField(widget=forms.PasswordInput)
+
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password']
+        model = Usuario
+        fields = ['correo', 'password']
 
     def clean_password1(self):
-        password = self.cleaned_data.get("password1")
+        password = self.cleaned_data.get("password")
         # Validaciones de seguridad
         if len(password) < 8:
             raise forms.ValidationError("La contraseña debe tener al menos 8 caracteres.")
@@ -47,3 +52,11 @@ class RegistroUsuarioForm(forms.ModelForm):
         if not any(c in "!@#$%^&*()_+-=[]{}|;':,.<>?/~`" for c in password):
             raise forms.ValidationError("La contraseña debe tener al menos un caracter especial.")
         return password
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirmar = cleaned_data.get("confirmar_password")
+
+        if password and confirmar and password != confirmar:
+            raise ValidationError("Las contraseñas no coinciden.")    

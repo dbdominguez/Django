@@ -31,58 +31,45 @@
             </div>
 
             <!-- Modal de Inicio de Sesión -->
-            <div class="modal fade" id="ModalInicioSecion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Inicio de Sesión</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="FormularioInicio">
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Correo Electrónico:</label>
-                                    <input type="email" class="form-control" id="email" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Contraseña:</label>
-                                    <input type="password" class="form-control" id="password" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="role" class="form-label">Selecciona tu rol:</label>
-                                    <select class="form-control" id="role" required>
-                                        <option value="admin">Administrador</option>
-                                        <option value="cliente">Cliente</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                            </form>
-                        </div>
-                    </div>
+            <form id="FormularioInicio" method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="correo" class="form-label">Correo Electrónico:</label>
+                    <input type="email" class="form-control" id="correo" name="correo" required>
                 </div>
-            </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+
+                <div class="text-center mt-3">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#ModalRecuperarContrasena" data-bs-dismiss="modal">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+                
+            </form>
 
             <!-- Modal de Recuperar Contraseña-->
-            <div class="modal fade" id="ModalRecuperarContrasena" tabindex="-1" aria-labelledby="RecuperarLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="RecuperarLabel">Recuperar Contraseña</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="RecuperarForm">
-                                <p>Ingresa tu correo electrónico para recibir un enlace de recuperación.</p>
-                                <div class="mb-3">
-                                    <label for="recuperarEmail" class="form-label">Correo Electrónico:</label>
-                                    <input type="email" class="form-control" id="recuperarEmail" placeholder="ejemplo@correo.com" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Enviar</button>
-                            </form>
-                        </div>
-                    </div>
+            <form id="RecuperarForm" method="POST" action="{% url 'recuperar_contrasena' %}">
+                {% csrf_token %}
+                <p>Ingresa tu correo electrónico para recibir un enlace de recuperación.</p>
+                <div class="mb-3">
+                    <label for="recuperarEmail" class="form-label">Correo Electrónico:</label>
+                    <input type="email" class="form-control" id="recuperarEmail" name="correo" placeholder="ejemplo@correo.com" required>
                 </div>
-            </div>            
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mt-3" role="alert">
+                     {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+                      
 
             <!-- Encabezado -->
             <div class="container-fluid px-4">

@@ -1,5 +1,8 @@
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from .models import Usuario
 from .forms import RegistroUsuarioForm
 
 def registro_usuario(request):
@@ -14,12 +17,12 @@ def registro_usuario(request):
 
 def login_usuario(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        correo = request.POST.get('correo')
+        password = request.POST.get('password')
+        user = authenticate(request, correo=correo, password=password)
         if user:
             login(request, user)
-            return redirect('inicio')
+            return redirect('Index')
         else:
             return render(request, 'login.html', {'error': 'Credenciales inválidas'})
     return render(request, 'login.html')
@@ -27,6 +30,18 @@ def login_usuario(request):
 def logout_usuario(request):
     logout(request)
     return redirect('login')
+
+def recuperar_contrasena(request):
+    if request.method == 'POST':
+        correo = request.POST.get('correo')
+        Usuario = get_user_model()
+        try:
+            usuario = Usuario.objects.get(correo=correo)
+            messages.success(request, f'Se ha enviado un enlace de recuperación a {correo}.')
+        except Usuario.DoesNotExist:
+            messages.error(request, 'El correo ingresado no está registrado.')
+        return redirect('Index') 
+    
 # General.
 def inicio(request):
     return render(request, "Index.html")
@@ -106,3 +121,44 @@ def VirtuaFighter5(request):
 
 def PacManMuseum(request):
     return render(request, "PacManMuseum.html")
+
+
+
+# ADMIN 
+@login_required
+@user_passes_test(solo_admins)
+def listar_usuarios(request):
+    usuarios = Usuario.objects.all()
+    return render(request, 'usuarios/listar.html', {'usuarios': usuarios})
+
+@login_required
+@user_passes_test(solo_admins)
+def crear_usuario(request):
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_usuarios')
+    else:
+        form = UsuarioForm()
+    return render(request, 'usuarios/crear.html', {'form': form})
+
+@login_required
+@user_passes_test(solo_admins)
+def editar_usuario(request, id):
+    usuario = get_object_or_404(Usuario, id=id)
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_usuarios')
+    else:
+        form = UsuarioForm(instance=usuario)
+    return render(request, 'usuarios/editar.html', {'form': form})
+
+@login_required
+@user_passes_test(solo_admins)
+def eliminar_usuario(request, id):
+    usuario = get_object_or_404(Usuario, id=id)
+    usuario.delete()
+    return redirect('listar_usuarios')

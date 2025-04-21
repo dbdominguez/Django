@@ -15,11 +15,13 @@ admin.site.register(DetalleCompra)
 
 #editado
 from django.contrib import admin
-from .models import Categoria, Juego, Perfil, Orden, OrdenItem, Valoracion
+from .models import Rol, Usuario, Producto, Carrito, Compra, DetalleCompra, Categoria, Plataforma
 
+admin.site.register(Rol)
+admin.site.register(Usuario)
+admin.site.register(Producto)
+admin.site.register(Carrito)
+admin.site.register(Compra)
+admin.site.register(DetalleCompra)
 admin.site.register(Categoria)
-admin.site.register(Juego)
-admin.site.register(Perfil)
-admin.site.register(Orden)
-admin.site.register(OrdenItem)
-admin.site.register(Valoracion)
+admin.site.register(Plataforma)
