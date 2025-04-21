@@ -23,6 +23,7 @@ urlpatterns = [
     path('Index/', views.inicio, name='Index'),
     path('Registro/', views.Registro, name='Registro'),
     path('Perfil/', views.Perfil, name='Perfil'),
+    path('PerfilAdmin/', views.PerfilAdmin, name='PerfilAdmin'),
 
     path('Carro/', views.Carro, name='Carro'),
     path('agregar/<int:producto_id>/', views.agregar_al_carro, name='agregar_al_carro'),
@@ -56,14 +57,13 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 
-    path('admin/usuarios/', views.listar_usuarios, name='listar_usuarios'),
-    path('admin/usuarios/crear/', views.crear_usuario, name='crear_usuarios'),
-    path('admin/usuarios/editar/<int:id>/', views.editar_usuario, name='editar_usuarios'),
-    path('admin/usuarios/eliminar/<int:id>/', views.eliminar_usuario, name='eliminar_usuarios'),
+    path('gestion/usuarios/', views.listar_usuarios, name='listar_usuarios'),
+    path('gestion/usuarios/crear/', views.crear_usuario, name='crear_usuario'),
+    path('gestion/usuarios/editar/<int:id>/', views.editar_usuario, name='editar_usuario'),
+    path('gestion/usuarios/eliminar/<int:id>/', views.eliminar_usuario, name='eliminar_usuario'),
 
-
-    path('admin/productos/', views.listar_productos, name='listar_productos'),
-    path('admin/productos/crear/', views.crear_producto, name='crear_producto'),
-    path('admin/productos/editar/<int:id>/', views.editar_producto, name='editar_producto'),
-    path('admin/productos/eliminar/<int:id>/', views.eliminar_producto, name='eliminar_producto'),
+    path('gestion/productos/', views.listar_productos, name='listar_productos'),
+    path('gestion/productos/crear/', views.crear_producto, name='crear_producto'),
+    path('gestion/productos/editar/<int:id>/', views.editar_producto, name='editar_producto'),
+    path('gestion/productos/eliminar/<int:id>/', views.eliminar_producto, name='eliminar_producto'),
 ]

@@ -27,6 +27,17 @@ class UsuarioManager(BaseUserManager):
     def create_superuser(self, correo, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        # Aquí asignamos el rol de administrador
+        from miapp.models import Rol  # Importar el modelo Rol si no está en el mismo archivo
+        rol_admin = Rol.objects.get(nombre='Administrador')  # Asegúrate de que este rol exista
+        extra_fields.setdefault('rol', rol_admin)
+
         return self.create_user(correo, password, **extra_fields)
 
 #USUARIO
