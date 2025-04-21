@@ -6,15 +6,19 @@ from .models import Usuario, Producto
 from .forms import RegistroUsuarioForm, ProductoForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 
-def registro_usuario(request):
+def Registro(request):
     if request.method == 'POST':
         form = RegistroUsuarioForm(request.POST)
         if form.is_valid():
-            form.save()
+            usuario = form.save(commit=False)
+            usuario.rol_id = 2 
+            usuario.save()
             return redirect('login')
     else:
         form = RegistroUsuarioForm()
     return render(request, 'registro.html', {'form': form})
+
+ 
 
 def login_usuario(request):
     if request.method == 'POST':
@@ -33,6 +37,7 @@ def login_usuario(request):
             return redirect('Index')
     else:
         return redirect('Index')
+    
 
 def logout_usuario(request):
     logout(request)
@@ -64,7 +69,7 @@ def agregar_al_carro(request, producto_id):
 def inicio(request):
     return render(request, "Index.html")
 
-def Registro(request):
+def registro_usuario(request):
     return render(request, "Registro.html")
 
 @login_required

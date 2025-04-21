@@ -31,48 +31,39 @@ import re
 from django import forms
 from .models import Usuario, Producto, Rol
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.hashers import make_password
 
-class RegistroUsuarioForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    confirmar_password = forms.CharField(widget=forms.PasswordInput)
-
+class RegistroUsuarioForm(UserCreationForm):
     class Meta:
         model = Usuario
-        fields = ['nombre', 'apellido', 'correo', 'direccion', 'telefono', 'password']
+        fields = ['nombre', 'apellido', 'correo', 'telefono', 'direccion']
 
-    def save(self, commit=True):
-        usuario = super().save(commit=False)
-        usuario.password = make_password(self.cleaned_data['password'])
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password1'].label = "Contraseña"
+        self.fields['password2'].label = "Confirmar Contraseña"
 
-        # Asignar rol por defecto (por ejemplo, "Cliente")
-        rol_cliente = Rol.objects.get(nombre="Cliente")
-        usuario.rol = rol_cliente
 
-        if commit:
-            usuario.save()
-        return usuario
 
-    def clean_password(self):
-        password = self.cleaned_data.get("password")
-        # Validaciones de seguridad
-        if len(password) < 8:
-            raise forms.ValidationError("La contraseña debe tener al menos 8 caracteres.")
-        if not any(c.isdigit() for c in password):
-            raise forms.ValidationError("La contraseña debe contener al menos un número.")
-        if not any(c.isupper() for c in password):
-            raise forms.ValidationError("La contraseña debe tener al menos una letra mayúscula.")
-        if not any(c in "!@#$%^&*()_+-=[]{}|;':,.<>?/~`" for c in password):
-            raise forms.ValidationError("La contraseña debe tener al menos un caracter especial.")
-        return password
-    
     def clean(self):
         cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        confirmar = cleaned_data.get("confirmar_password")
+        password = cleaned_data.get("password1")
+        confirmar = cleaned_data.get("password2")
 
         if password and confirmar and password != confirmar:
-            raise ValidationError("Las contraseñas no coinciden.")
+            raise forms.ValidationError("Las contraseñas no coinciden.")
+
+        if password:
+            if len(password) < 8:
+                raise forms.ValidationError("La contraseña debe tener al menos 8 caracteres.")
+            if not any(c.isdigit() for c in password):
+                raise forms.ValidationError("Debe contener al menos un número.")
+            if not any(c.isupper() for c in password):
+                raise forms.ValidationError("Debe contener al menos una letra mayúscula.")
+            if not any(c in "!@#$%^&*()_+-=[]{}|;':,.<>?/~`" for c in password):
+                raise forms.ValidationError("Debe contener al menos un carácter especial.")
+
 
 
 class ProductoForm(forms.ModelForm):

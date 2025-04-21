@@ -17,20 +17,19 @@ class Rol(models.Model):
 class UsuarioManager(BaseUserManager):
     def create_user(self, correo, password=None, **extra_fields):
         if not correo:
-            raise ValueError("El correo es obligatorio")
+            raise ValueError('El correo es obligatorio')
         correo = self.normalize_email(correo)
-        user = self.model(correo=correo, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
+        usuario = self.model(correo=correo, **extra_fields)
+        usuario.set_password(password)
+        usuario.save(using=self._db)
+        return usuario
 
     def create_superuser(self, correo, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(correo, password, **extra_fields)
 
-
-# USUARIO Tabla
+#USUARIO
 class Usuario(AbstractBaseUser, PermissionsMixin):
     class Meta:
         db_table = 'USUARIO'
@@ -42,18 +41,17 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     correo = models.EmailField(unique=True, db_column='CORREO')
     direccion = models.CharField(max_length=255, db_column='DIRECCION', null=True, blank=True)
     telefono = models.CharField(max_length=20, db_column='TELEFONO', null=True, blank=True)
-    clave = models.CharField(max_length=255, db_column='CLAVE')
+    password = models.CharField(max_length=255, db_column='PASSWORD')
     is_active = models.BooleanField(default=True, db_column='ACTIVO')
     is_staff = models.BooleanField(default=False)
 
-
-    objects = UsuarioManager()
-
     USERNAME_FIELD = 'correo'
     REQUIRED_FIELDS = ['nombre', 'apellido']
+    
+    objects = UsuarioManager()
 
     def __str__(self):
-        return f'{self.nombre} {self.apellido} ({self.correo})'
+        return self.correo
 
 
 # CATEGORIA Tabla
