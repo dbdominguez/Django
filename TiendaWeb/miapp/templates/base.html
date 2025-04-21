@@ -32,38 +32,51 @@
                 </div>
             </div>
             
-            <!-- Modal de Inicio de Sesión -->
-            <div class="modal fade" id="ModalInicioSesion" tabindex="-1" aria-labelledby="ModalInicioSesionLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <form id="FormularioInicio" method="POST" action="{% url 'login' %}">
-                      {% csrf_token %}
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="ModalInicioSesionLabel">Iniciar Sesión</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="mb-3">
-                          <label for="correo" class="form-label">Correo Electrónico:</label>
-                          <input type="email" class="form-control" id="correo" name="correo" required>
-                        </div>
-                        <div class="mb-3">
-                          <label for="password" class="form-label">Contraseña:</label>
-                          <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                        <div class="text-center mt-3">
-                          <a href="#" data-bs-toggle="modal" data-bs-target="#ModalRecuperarContrasena" data-bs-dismiss="modal">
-                            ¿Olvidaste tu contraseña?
-                          </a>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-            </div>
+<!-- Modal de Inicio de Sesión -->
+<div class="modal fade" id="ModalInicioSesion" tabindex="-1" aria-labelledby="ModalInicioSesionLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Formulario -->
+      <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalInicioSesionLabel">Iniciar Sesión</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <div class="modal-body">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+
+          <div class="mb-3">
+            <label for="loginCorreo" class="form-label">Correo Electrónico:</label>
+            <input type="email" class="form-control" id="loginCorreo" name="correo" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="loginPassword" class="form-label">Contraseña:</label>
+            <input type="password" class="form-control" id="loginPassword" name="password" required>
+          </div>
+
+          <div class="text-center mt-3">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#ModalRecuperarContrasena" data-bs-dismiss="modal">
+              ¿Olvidaste tu contraseña?
+            </a>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
 
             <!-- Modal de Recuperar Contraseña -->
             <div class="modal fade" id="ModalRecuperarContrasena" tabindex="-1" aria-labelledby="ModalRecuperarContrasenaLabel" aria-hidden="true">
@@ -203,4 +216,6 @@
     <script src="{% static 'core/js/validacion.js' %}"></script>
     <script src="{% static 'core/js/carrito.js' %}"></script>
     </body>
+
+    
 </html>        
