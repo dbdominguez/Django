@@ -55,6 +55,9 @@ urlpatterns = [
     path('VirtuaFighter5/', views.VirtuaFighter5, name='VirtuaFighter5'),
     path('PacManMuseum/', views.PacManMuseum, name='PacManMuseum'),
 
+    path('api/juegos/', views.juegos_api_externa, name='juegos_api_externa'),
+    path('api/productos/lista/', views.productos_api_lista, name='productos_api_lista'),
+
     path('admin/', admin.site.urls),
 
     path('gestion/usuarios/', views.listar_usuarios, name='listar_usuarios'),

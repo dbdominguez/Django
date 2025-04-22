@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2>Juegos populares desde API externa</h2>
+<ul>
+  {% for juego in juegos %}
+    <li>{{ juego.name }} - Rating: {{ juego.rating }}</li>
+  {% endfor %}
+</ul>
+
+
+{% endblock %}

@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from .models import Usuario, Producto
 from .forms import RegistroUsuarioForm, ProductoForm, PerfilUsuarioForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+import requests
 
 def Registro(request):
     if request.method == 'POST':
@@ -158,6 +159,24 @@ def VirtuaFighter5(request):
 
 def PacManMuseum(request):
     return render(request, "PacManMuseum.html")
+
+# API EXTERNA
+def juegos_api_externa(request):
+    url = 'https://api.rawg.io/api/games'
+    params = {
+        'key': '446b53a8039f4f14911502bea09dbe8d',
+        'page_size': 6,
+    }
+    response = requests.get(url, params=params)
+    juegos = response.json().get('results', [])
+
+    return render(request, 'juegos_api.html', {'juegos': juegos})
+
+
+# API PROPIA
+def productos_api_lista(request):
+    productos = Producto.objects.all()
+    return render(request, 'productos_api.html', {'productos': productos})
 
 
 
