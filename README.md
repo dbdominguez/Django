@@ -1,5 +1,7 @@
 # 🎮 TiendaWeb - Proyecto Django
 
+Link Repositorio GIT: https://github.com/dbdominguez/Django.git
+
 ## ACLARACION
 
 Durante el desarrollo la conexion a base de datos Oracle presento multiples problemes, aunque se logro hacer conexion una pc en especifico faltaron ensayos
