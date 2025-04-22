@@ -178,13 +178,19 @@ def productos_api_lista(request):
     productos = Producto.objects.all()
     return render(request, 'productos_api.html', {'productos': productos})
 
-
+# REDIRECCION
+@login_required
+def redireccionar_perfil(request):
+    if request.user.rol.nombre == "Administrador":
+        return redirect('PerfilAdmin')
+    else:
+        return redirect('Perfil')
 
 # ADMIN
 @login_required
 @user_passes_test(solo_admins)
 def PerfilAdmin(request):
-    return render(request, "PerfilAdmin.html")
+    return render(request, "PerfilAdmin.html", {"usuario": request.user})
 
 
 # USUARIOS 

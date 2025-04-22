@@ -139,7 +139,7 @@
                         </a>
                         {% if user.is_authenticated %}
                         <!-- Enlace al perfil si el usuario está autenticado -->
-                        <a href="{% url 'Perfil' %}" id="iconoPerfil">
+                        <a href="{% url 'redireccionar_perfil' %}" id="iconoPerfil">
                             <img src="{% static 'core/Imagenes/iconos/cuenta.png' %}" alt="Cuenta" class="img-fluid" style="max-height: 60px;">
                         </a>
                         {% else %}
