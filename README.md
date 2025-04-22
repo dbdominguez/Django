@@ -8,8 +8,10 @@ Durante el desarrollo la conexion a base de datos Oracle presento multiples prob
 para comprobar si se puede hacer conexion desde un equipo ajeno.
 
 Para la conexion se incluyo dentro del proyecto la carpeta con el Instant Client Version 23.7.0.25.01 Basic Package(asegurar que la vr de python sea la misma que del cliente -x64 o x32-) sin embargo se requiere que el usuario consiga el Instant Client desde la pagina Oracle debido a que un archivo (oraociei.dll) no puede ser añadido al repositorio debido a su tamaño.
+url= https://www.oracle.com/cl/database/technologies/instant-client/winx64-64-downloads.html, Version 23.7.0.25.01 Basic Package
+(Si es demasiado problema, remplazar completamente el contenido de la carpeta con el del zip)
 
-Desde el cmd utilizar: set TNS_ADMIN= \La\ruta\que\corresponda\para\dar\con\la\carpeta\Wallet"
+Desde el cmd utilizar: set TNS_ADMIN= \La\ruta\que\corresponda\para\dar\con\la\carpeta\Wallet
 
 Dentro de la carpeta Wallet, en el archivo sqlnet.ora verifique la ruta del WALLET_LOCATION (debe coincidir con la ruta utilizada en el TNS_ADMIN)
 
