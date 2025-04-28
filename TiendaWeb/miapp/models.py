@@ -72,6 +72,8 @@ class Categoria(models.Model):
     id_categoria = models.AutoField(primary_key=True, db_column='ID_CATEGORIA')
     nombre = models.CharField(max_length=50, db_column='NOMBRE')
 
+    def __str__(self):
+        return self.nombre
 
 # PLATAFORMA Tabla
 class Plataforma(models.Model):
@@ -80,6 +82,8 @@ class Plataforma(models.Model):
     id_categoria = models.AutoField(primary_key=True, db_column='ID_PLATAFORMA')
     nombre = models.CharField(max_length=50, db_column='NOMBRE')
 
+    def __str__(self):
+        return self.nombre
 
 # PRODUCTO tabla
 class Producto(models.Model):
