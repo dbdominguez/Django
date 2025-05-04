@@ -250,7 +250,7 @@ def crear_producto(request):
             return redirect('listar_productos')
     else:
         form = ProductoForm()
-    return render(request, 'formulario_producto.html', {'form': form})
+    return render(request, 'formulario_productos.html', {'form': form})
 
 @login_required
 @user_passes_test(solo_admins)
@@ -263,7 +263,7 @@ def editar_producto(request, id):
             return redirect('listar_productos')
     else:
         form = ProductoForm(instance=producto)
-    return render(request, 'formulario_producto.html', {'form': form})
+    return render(request, 'formulario_productos.html', {'form': form})
 
 @login_required
 @user_passes_test(solo_admins)
