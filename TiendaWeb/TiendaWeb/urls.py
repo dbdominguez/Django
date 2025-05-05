@@ -56,6 +56,7 @@ urlpatterns = [
     path('PacManMuseum/', views.PacManMuseum, name='PacManMuseum'),
 
     path('api/juegos/', views.juegos_api_externa, name='juegos_api_externa'),
+    path('api/ofertas/', views.ofertas_juegos_api_externa, name='ofertas_juegos_api_externa'),
     path('api/productos/lista/', views.productos_api_lista, name='productos_api_lista'),
     path('perfil/redirect/', views.redireccionar_perfil, name='redireccionar_perfil'),
 

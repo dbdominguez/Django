@@ -160,7 +160,7 @@ def VirtuaFighter5(request):
 def PacManMuseum(request):
     return render(request, "PacManMuseum.html")
 
-# API EXTERNA
+# API EXTERNA 1
 def juegos_api_externa(request):
     url = 'https://api.rawg.io/api/games'
     params = {
@@ -172,6 +172,40 @@ def juegos_api_externa(request):
 
     return render(request, 'juegos_api.html', {'juegos': juegos})
 
+# API CAMBIO MONETARIO
+# KEY
+EXCHANGE_API_KEY = 'd975c908be6eca69ca1733b7'
+
+#API
+def obtener_tasa_cambio(moneda_destino='CLP'):
+    url = f'https://v6.exchangerate-api.com/v6/{EXCHANGE_API_KEY}/latest/USD'
+    response = requests.get(url)
+    if response.status_code == 200:
+        datos = response.json()
+        tasa = datos['conversion_rates'].get(moneda_destino)
+        return tasa if tasa else 1
+    return 1
+
+
+# API EXTERNA 2
+def ofertas_juegos_api_externa(request):
+    tasa_cambio = obtener_tasa_cambio('CLP')
+    url = 'https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=15&limit=5'
+    response = requests.get(url)
+
+    ofertas = []
+    if response.status_code == 200:
+        datos = response.json()
+        for juego in datos:
+            sale_price_usd = float(juego['salePrice'])
+            normal_price_usd = float(juego['normalPrice'])
+
+            juego['salePriceLocal'] = round(sale_price_usd * tasa_cambio)
+            juego['normalPriceLocal'] = round(normal_price_usd * tasa_cambio)
+            juego['moneda'] = 'CLP' 
+            ofertas.append(juego)
+
+    return render(request, 'ofertas.html', {'ofertas': ofertas})
 
 # API PROPIA
 def productos_api_lista(request):

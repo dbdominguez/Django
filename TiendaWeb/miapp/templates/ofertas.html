@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>💲Ofertas de Videojuegos💲</h2>
+    
+<ul>
+{% for oferta in ofertas|slice:":5" %}
+    <li>
+        <h3>{{ oferta.title }}</h3>
+        <p>Precio actual: {{ oferta.salePriceLocal }} {{ oferta.moneda }}</p>
+        <p>Precio normal: {{ oferta.normalPriceLocal }} {{ oferta.moneda }}</p>
+        <p>Ahorro: {{ oferta.savings|floatformat:2 }}%</p>
+        <a href="https://www.cheapshark.com/redirect?dealID={{ oferta.dealID }}" target="_blank">Ver Oferta</a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}
+
