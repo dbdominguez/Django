@@ -73,8 +73,6 @@ urlpatterns = [
     path('api/productos/lista/', views.productos_api_lista, name='productos_api_lista'),
     path('perfil/redirect/', views.redireccionar_perfil, name='redireccionar_perfil'),
 
-    # Administración
-    path('admin/', admin.site.urls),
 
     # Gestión de usuarios
     path('gestion/usuarios/', views.listar_usuarios, name='listar_usuarios'),
