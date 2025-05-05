@@ -92,7 +92,7 @@ class Producto(models.Model):
     id_producto = models.AutoField(primary_key=True, db_column='ID_PRODUCTO')
     nombre = models.CharField(max_length=100, db_column='NOMBRE')
     descripcion = models.TextField(db_column='DESCRIPCION', null=True, blank=True)
-    precio = models.DecimalField(max_digits=10, decimal_places=2, db_column='PRECIO')
+    precio = models.DecimalField(db_column='PRECIO')
     stock = models.IntegerField(default=0, db_column='STOCK')
     imagen_url = models.CharField(max_length=255, db_column='IMAGEN_URL', null=True, blank=True)
     plataforma = models.ForeignKey(Plataforma, on_delete=models.CASCADE, db_column='ID_PLATAFORMA')

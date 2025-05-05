@@ -206,6 +206,12 @@ if (tipoDocumentoSelect) {
 
         if (tipoSeleccionado) {
             generarDocumento(tipoSeleccionado);
+
+            // Mostrar la sección de "Resumen de Precio"
+            seccionPrecio.style.display = "block";
+        } else {
+            // Ocultar la sección de "Resumen de Precio" si no hay selección válida
+            seccionPrecio.style.display = "none";
         }
     });
 }

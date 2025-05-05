@@ -2,10 +2,12 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from .models import Usuario, Producto
+from .models import Usuario, Producto, Categoria, Producto
 from .forms import RegistroUsuarioForm, ProductoForm, PerfilUsuarioForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 import requests
+from django.contrib import messages
+
 
 def Registro(request):
     if request.method == 'POST':
@@ -58,14 +60,33 @@ def recuperar_contrasena(request):
 def solo_admins(user):
     return user.is_authenticated and user.rol.nombre == "Administrador"
 
-
 def agregar_al_carro(request, producto_id):
     producto = get_object_or_404(Producto, pk=producto_id)
-    carro = request.session.get('carrito', {})
-    carro[str(producto_id)] = carro.get(str(producto_id), 0) + 1
-    request.session['carro'] = carro
-    return redirect('carro')
-    
+    carro = request.session.get('carro', {})
+
+    # Verificar si el producto tiene stock disponible
+    if producto.stock is None or producto.stock <= 0:
+        messages.error(request, f'El producto {producto.nombre} no está disponible.')
+        return redirect('Carro')
+
+    # Verificar stock antes de agregar al carrito
+    if carro.get(str(producto_id), 0) < producto.stock:
+        carro[str(producto_id)] = carro.get(str(producto_id), 0) + 1
+        request.session['carro'] = carro
+        request.session.modified = True  # Asegurar que la sesión se guarde
+        messages.success(request, f'{producto.nombre} fue agregado al carrito.')
+    else:
+        messages.error(request, f'No hay suficiente stock de {producto.nombre}.')
+
+    return redirect('Carro')
+
+def eliminar_prod_al_carro(request, producto_id):
+    carro = request.session.get('carro', {})
+    if str(producto_id) in carro:
+        del carro[str(producto_id)]
+        request.session['carro'] = carro
+    return redirect('Carro')
+
 # General.
 def inicio(request):
     return render(request, "Index.html")
@@ -91,9 +112,60 @@ def Perfil(request):
     })
 
 def Carro(request):
-    return render(request, "Carro.html")
+    # Obtener el carrito de la sesión
+    carro = request.session.get('carro', {})
+    productos = []
+    total = 0
+
+    # Construir la lista de productos con sus detalles
+    for producto_id, cantidad in carro.items():
+        producto = get_object_or_404(Producto, pk=producto_id)
+        subtotal = producto.precio * cantidad
+        total += subtotal
+        productos.append({
+            'producto': producto,
+            'cantidad': cantidad,
+            'subtotal': subtotal
+        })
+
+    # Pasar los productos y el total a la plantilla
+    return render(request, "Carro.html", {
+        'productos': productos,
+        'total': total
+    })
+
+def finalizar_compra(request):
+    if request.method == 'POST':
+        carro = request.session.get('carro', {})
+        for producto_id, cantidad in carro.items():
+            producto = Producto.objects.get(pk=producto_id)
+            if producto.stock >= cantidad:
+                producto.stock -= cantidad
+                producto.save()
+            else:
+                messages.error(request, f"No hay suficiente stock para {producto.nombre}.")
+                return redirect('Carro')
+
+        # Vaciar el carrito después de la compra
+        request.session['carro'] = {}
+        request.session.modified = True
+        messages.success(request, "Compra finalizada con éxito.")
+        return redirect('Carro')
+    else:
+        return redirect('Carro')
+
+#Actualizar la vista para filtrar productos por categoría
+def productos_por_categoria(request, categoria_id):
+    categoria = get_object_or_404(Categoria, id_categoria=categoria_id)
+    productos = Producto.objects.filter(categoria=categoria)
+    return render(request, 'Categorias.html', {'juegos': productos, 'categoria': categoria})
+
+def detalle_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id_producto=producto_id)
+    return render(request, 'Juegos.html', {'producto': producto})
 
 
+'''
 # Categorias.
 def visualnovel(request):
     return render(request, "visual-novel.html")
@@ -115,8 +187,8 @@ def deporte(request):
 
 def arcadeclasicos(request):
     return render(request, "arcade-clasicos.html")
-
-
+'''
+'''
 # Juegos.
 def DanganronpaV3(request):
     return render(request, "DanganronpaV3.html")
@@ -159,7 +231,7 @@ def VirtuaFighter5(request):
 
 def PacManMuseum(request):
     return render(request, "PacManMuseum.html")
-
+'''
 # API EXTERNA 1
 def juegos_api_externa(request):
     url = 'https://api.rawg.io/api/games'
