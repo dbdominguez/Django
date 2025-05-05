@@ -2,7 +2,15 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from .models import Usuario, Producto
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from django.http import JsonResponse
+from .models import Usuario, Producto, Categoria
 from .forms import RegistroUsuarioForm, ProductoForm, PerfilUsuarioForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 import requests
@@ -207,10 +215,72 @@ def ofertas_juegos_api_externa(request):
 
     return render(request, 'ofertas.html', {'ofertas': ofertas})
 
-# API PROPIA
+# API ADMIN
 def productos_api_lista(request):
     productos = Producto.objects.all()
     return render(request, 'productos_api.html', {'productos': productos})
+
+# LISTAR
+def listar_productos(request):
+    id_categoria = request.GET.get('categoria')
+    productos = Producto.objects.all()
+
+    if id_categoria:
+        productos = productos.filter(id_categoria=id_categoria)
+
+    categorias = Categoria.objects.all()
+    return render(request, 'productos_api.html', {
+        'productos': productos,
+        'categorias': categorias,
+    })
+
+# TOKEN
+class CustomAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        correo = request.data.get('correo')
+        password = request.data.get('password')
+        user = authenticate(request, correo=correo, password=password)
+        if not user:
+            return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_400_BAD_REQUEST)
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key})
+
+
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+# API para productos
+def api_productos(request):
+    productos = Producto.objects.select_related('categoria').all()
+    
+    data = []
+    for producto in productos:
+        data.append({
+            'id': producto.id_producto,
+            'nombre': producto.nombre,
+            'precio': float(producto.precio),
+            'categoria': producto.categoria.nombre,
+        })
+    
+    return Response(data)
+
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+# API para categorías
+def api_categorias(request):
+    categorias = Categoria.objects.all()
+    
+    data = []
+    for categoria in categorias:
+        data.append({
+            'id': categoria.id_categoria,
+            'nombre': categoria.nombre,
+        })
+    
+    return Response(data)
 
 # REDIRECCION
 @login_required

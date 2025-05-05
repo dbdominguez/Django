@@ -34,8 +34,8 @@ class UsuarioManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         # Aquí asignamos el rol de administrador
-        from miapp.models import Rol  # Importar el modelo Rol si no está en el mismo archivo
-        rol_admin = Rol.objects.get(nombre='Administrador')  # Asegúrate de que este rol exista
+        from miapp.models import Rol  
+        rol_admin = Rol.objects.get(nombre='Administrador')
         extra_fields.setdefault('rol', rol_admin)
 
         return self.create_user(correo, password, **extra_fields)

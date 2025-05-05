@@ -4,13 +4,34 @@
 {% block content %}
 
 <div class="container mt-4">
-    <h2>Listado de Productos desde Base de Datos</h2>
+    <h2 class="text-center mb-3">Lista de Productos</h2>
+
+    <!-- Filtro de categorías -->
+    <form method="get" class="row mb-4 justify-content-center">
+        <div class="col-md-4">
+            <select name="categoria" class="form-select" onchange="this.form.submit()">
+                <option value="">Todas las categorías</option>
+                {% for cat in categorias %}
+                    <option value="{{ cat.id }}" {% if cat.id|stringformat:"s" == request.GET.categoria %}selected{% endif %}>
+                        {{ cat.nombre }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+
+    <!-- Lista de productos -->
     <ul class="list-group">
         {% for producto in productos %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <strong>{{ producto.nombre }}</strong> - ${{ producto.precio }} 
-                <span class="badge bg-secondary">Categoría ID: {{ producto.categoria_id }}</span>
+            <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm mb-2" style="border-radius: 10px;">
+                <div>
+                    <h5 class="mb-1">{{ producto.nombre }}</h5>
+                    <small class="text-muted">Categoría: {{ producto.categoria.nombre }}</small>
+                </div>
+                <span class="badge bg-success fs-6">$ {{ producto.precio }}</span>
             </li>
+        {% empty %}
+            <li class="list-group-item text-center text-muted">No hay productos disponibles para esta categoría.</li>
         {% endfor %}
     </ul>
 </div>

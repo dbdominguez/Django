@@ -15,7 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework.authtoken.views import obtain_auth_token
+from miapp.views import CustomAuthToken
 from miapp import views
 
 urlpatterns = [
@@ -61,6 +63,9 @@ urlpatterns = [
     path('perfil/redirect/', views.redireccionar_perfil, name='redireccionar_perfil'),
 
     path('admin/', admin.site.urls),
+    path('', include('miapp.urls')),
+
+    path('api/token/', CustomAuthToken.as_view(), name='api_token_auth'),
 
     path('gestion/usuarios/', views.listar_usuarios, name='listar_usuarios'),
     path('gestion/usuarios/crear/', views.crear_usuario, name='crear_usuario'),
