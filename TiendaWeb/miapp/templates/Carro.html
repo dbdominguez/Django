@@ -12,7 +12,7 @@
                     <a class="nav-link active" aria-current="true" href="#seccion-productos">Productos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#seccion-envio">Envio</a>
+                    <a class="nav-link" href="#seccion-envio">Envío</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#seccion-precio">Precio</a>
@@ -24,15 +24,29 @@
             <div id="seccion-productos">
                 <h2 class="text-center mb-4">Carrito de Compras</h2>
                 <div id="carrito" class="row">
-                    <!-- Las tarjetas de los productos se generarán aquí -->
+                    {% for item in productos %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <img src="{{ item.producto.imagen_url }}" class="card-img-top" alt="{{ item.producto.nombre }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ item.producto.nombre }}</h5>
+                                <p class="card-text">Cantidad: {{ item.cantidad }}</p>
+                                <p class="card-text">Subtotal: ${{ item.subtotal }}</p>
+                                <a href="{% url 'eliminar_del_carro' item.producto.pk %}" class="btn btn-danger">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="text-center">El carrito está vacío.</p>
+                    {% endfor %}
                 </div>
-                <h4>Total: $<span id="total">0</span></h4>
-                <div class="d-flex justify-content-between"> <!--esta clase llama al boostrap y ubica los botones uno a la derecha y otro a la izquierda-->
-                <button id="vaciarCarrito" class="btn btn-danger mt-3">Vaciar Carrito</button>
-                <button id="finalizarCompra" class="btn btn-success mt-3">Siguiente</button>
+                <h4>Total: ${{ total }}</h4>
+                <div class="d-flex justify-content-between">
+                    <button id="vaciarCarrito" class="btn btn-danger mt-3">Vaciar Carrito</button>
+                    <button id="finalizarCompra" class="btn btn-success mt-3">Siguiente</button>
                 </div>
             </div>
-    
+
             <!-- Sección de Envío -->
             <div id="seccion-envio" style="display: none;">
                 <h2 class="text-center mb-4">Información de Envío o Retiro</h2>
@@ -46,7 +60,7 @@
                             <option value="retiro">Retiro en local</option>
                         </select>
                     </div>
-    
+
                     <!-- Campos para Envío a domicilio -->
                     <div id="form-envio" style="display: none;">
                         <h4 class="mb-3">Envío a domicilio</h4>
@@ -67,7 +81,7 @@
                             <input type="text" class="form-control" id="telefono" placeholder="Ingresa tu número de teléfono">
                         </div>
                     </div>
-    
+
                     <!-- Campos para Retiro en local -->
                     <div id="form-retiro" style="display: none;">
                         <h4 class="mb-3">Retiro en local</h4>
@@ -81,82 +95,48 @@
                         </div>
                         <p class="text-muted">Recuerda que puedes retirar tu pedido en nuestra sucursal más cercana.</p>
                     </div>
-    
+
                     <!-- Botones -->
                     <div class="d-flex justify-content-between">
-                    <button id="volverProductos" class="btn btn-secondary mt-3">Volver</button>
-                    <button type="submit" class="btn btn-primary mt-3">Siguiente</button>
+                        <button id="volverProductos" class="btn btn-secondary mt-3">Volver</button>
+                        <button type="submit" class="btn btn-primary mt-3">Siguiente</button>
                     </div>
                 </form>
             </div>
-            
-    
-            <!-- Sección de Precio -->
-            <div id="seccion-precio" class="container mt-5" style="display: none;">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="text-center mb-4">Resumen de Precio</h2>
-    
-                        <!-- Resumen del total -->
-                        <div class="mb-3">
-                            <p class="text-center">El total de tu compra es: <strong>$<span id="total-precio">0</span></strong></p>
-                        </div>
-    
-                        <!-- Selección entre Boleta y Factura -->
-                        <div class="mb-3">
-                            <label for="tipo-documento" class="form-label">Selecciona el tipo de documento:</label>
-                            <select class="form-select" id="tipo-documento">
-                                <option value="" selected disabled>Selecciona una opción</option>
-                                <option value="boleta">Boleta</option>
-                                <option value="factura">Factura</option>
-                            </select>
-                        </div>
-    
-                        <!-- Contenedor para mostrar la boleta o factura -->
-                        <div id="documento-generado" class="mt-4 p-3 border rounded" style="background-color: #f8f9fa; display: none;">
-                            <!-- El contenido de la boleta o factura se generará aquí -->
-                        </div>
-    
-                        <!-- Botón para volver -->
-                        <button id="volverEnvio" class="btn btn-secondary mt-3">Volver</button>
-                    </div>
-                </div>
+
+<!-- Sección de Precio -->
+<div id="seccion-precio" class="container mt-5" style="display: none;">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="text-center mb-4">Resumen de Precio</h2>
+
+            <!-- Resumen del total -->
+            <div class="mb-3">
+                <p class="text-center">El total de tu compra es: <strong>$<span id="total-precio">{{ total }}</span></strong></p>
             </div>
-    
-            <!-- Sección de Precio -->
-            <div id="seccion-precio" class="container mt-5" style="display: none;">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="text-center mb-4">Resumen de Precio</h2>
-    
-                        <!-- Resumen del total -->
-                        <div class="mb-3">
-                            <p class="text-center">El total de tu compra es: <strong>$<span id="total-precio">0</span></strong></p>
-                        </div>
-    
-                        <!-- Selección entre Boleta y Factura -->
-                        <div class="mb-3">
-                            <label for="tipo-documento" class="form-label">Selecciona el tipo de documento:</label>
-                            <select class="form-select" id="tipo-documento">
-                                <option value="" selected disabled>Selecciona una opción</option>
-                                <option value="boleta">Boleta</option>
-                                <option value="factura">Factura</option>
-                            </select>
-                        </div>
-    
-                        <!-- Contenedor para mostrar la boleta o factura -->
-                        <div id="documento-generado" class="mt-4 p-3 border rounded" style="background-color: #f8f9fa; display: none;">
-                            <!-- El contenido de la boleta o factura se generará aquí -->
-                        </div>
-    
-                        <!-- Botón para volver -->
-                         </div>
-                         <div class="d-flex justify-content-between"></div>
-                        <button id="volverEnvio" class="btn btn-secondary mt-3">Volver</button>
-                        <!--<button id="compraFinalizada" class="btn btn-success mt-3">Pagar</button>-->
-                        </div>
-                   </div>
-                </div>
+
+            <!-- Selección entre Boleta y Factura -->
+            <div class="mb-3">
+                <label for="tipo-documento" class="form-label">Selecciona el tipo de documento:</label>
+                <select class="form-select" id="tipo-documento" onchange="mostrarResumen()">
+                    <option value="" selected disabled>Selecciona una opción</option>
+                    <option value="boleta">Boleta</option>
+                    <option value="factura">Factura</option>
+                </select>
+            </div>
+
+            <!-- Contenedor para mostrar la boleta o factura -->
+            <div id="documento-generado" class="mt-4 p-3 border rounded" style="background-color: #f8f9fa; display: none;">
+                <!-- El contenido de la boleta o factura se generará aquí -->
+            </div>
+
+            <!-- Botones -->
+            <div class="d-flex justify-content-between">
+                <button id="volverEnvio" class="btn btn-secondary mt-3">Volver</button>
+                <form method="POST" action="{% url 'finalizar_compra' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success mt-3">Finalizar Compra</button>
+                </form>
             </div>
         </div>
     </div>
