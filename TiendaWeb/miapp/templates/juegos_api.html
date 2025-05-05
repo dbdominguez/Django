@@ -3,12 +3,33 @@
 
 {% block content %}
 
-<h2>Juegos populares desde API externa</h2>
-<ul>
-  {% for juego in juegos %}
-    <li>{{ juego.name }} - Rating: {{ juego.rating }}</li>
-  {% endfor %}
-</ul>
+<div class="container">
+  <h2 class="text-center mt-4 mb-2">🎮 Juegos Populares 🎮</h2>
+  <p class="text-center text-muted mb-4" style="font-style: italic;">
+      ¿No sabes que jugar? Explora los títulos mejor valorados por la comunidad. ¿Cuál será tu próxima aventura a visitar?</p>
+
+  <div class="row justify-content-center">
+      {% for juego in juegos %}
+          <div class="col-md-4 col-lg-3 mb-4 d-flex justify-content-center">
+              <div class="card p-3 shadow-sm" style="width: 100%; max-width: 250px; border-radius: 15px; background: #e7f3ff;">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">{{ juego.name }}</h5>
+                      {% if juego.background_image %}
+                          <img src="{{ juego.background_image }}" class="img-fluid mb-2" style="max-height: 120px; border-radius: 10px;" alt="Imagen del juego">
+                      {% else %}
+                          <p class="text-muted">Imagen no disponible</p>
+                      {% endif %}
+                      <p class="card-text">⭐ Rating: {{ juego.rating }}</p>
+
+                      {% if juego.released %}
+                          <p class="text-muted" style="font-size: 0.9em;">Lanzado: {{ juego.released }}</p>
+                      {% endif %}
+                  </div>
+              </div>
+          </div>
+      {% endfor %}
+  </div>
+</div>
 
 
 {% endblock %}

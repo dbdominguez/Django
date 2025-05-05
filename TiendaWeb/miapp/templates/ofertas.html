@@ -3,13 +3,13 @@
 
 {% block content %}
 <div class="container">
-    <h2 class="text-center mt-4 mb-4">💲Ofertas de Videojuegos💲</h2>
+    <h2 class="text-center mt-4 mb-4">💲 Ofertas de Videojuegos 💲</h2>
     <p class="text-center text-muted mb-4" style="font-style: italic;">
         Que no tengamos el juego no signifique que no puedas conseguirlo a buen precio.<br>
         ¡Que nunca dejemos de jugar 🎮!</p>
 
     <div class="row justify-content-center">
-        {% for oferta in ofertas|slice:":5" %}
+        {% for oferta in ofertas|slice:":12" %}
             <div class="col-md-4 col-lg-3 mb-4 d-flex justify-content-center">
                 <div class="card p-3 shadow-sm" style="width: 100%; max-width: 250px; border-radius: 15px; background: #f1f1f1;">
                     <img src="https://www.cheapshark.com/img/stores/logos/{{ oferta.storeID }}.png" class="card-img-top mx-auto" style="max-width: 100px;" alt="Tienda">

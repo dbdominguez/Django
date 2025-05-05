@@ -165,7 +165,7 @@ def juegos_api_externa(request):
     url = 'https://api.rawg.io/api/games'
     params = {
         'key': '446b53a8039f4f14911502bea09dbe8d',
-        'page_size': 6,
+        'page_size': 12,
     }
     response = requests.get(url, params=params)
     juegos = response.json().get('results', [])
