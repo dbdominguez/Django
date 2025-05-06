@@ -2,20 +2,23 @@
 
 Link Repositorio GIT: https://github.com/dbdominguez/Django.git
 
-## ACLARACION
+## INDICE
+1.-Aclaracion
+2.-Proyecto
+3.-Estructura del Proyecto
+4.-API y Postman
 
-Durante el desarrollo la conexion a base de datos Oracle presento multiples problemes, aunque se logro hacer conexion una pc en especifico faltaron ensayos
-para comprobar si se puede hacer conexion desde un equipo ajeno.
-
-Para la conexion se incluyo dentro del proyecto la carpeta con el Instant Client Version 23.7.0.25.01 Basic Package(asegurar que la vr de python sea la misma que del cliente -x64 o x32-) sin embargo se requiere que el usuario consiga el Instant Client desde la pagina Oracle debido a que un archivo (oraociei.dll) no puede ser añadido al repositorio debido a su tamaño.
+# 1.- ACLARACION
+Para la conexion de BD se hace uso de Instant Client Version 23.7.0.25.01 Basic Package(asegurar que la vr de python coincida con el Client), en caso de no tener el archivo (oraociei.dll) dado que decidio acceder al proyecto desde el respositorio debe descargar el packge desde la pagina:
 url= https://www.oracle.com/cl/database/technologies/instant-client/winx64-64-downloads.html, Version 23.7.0.25.01 Basic Package
-(Si es demasiado problema, remplazar completamente el contenido de la carpeta con el del zip)
+
+# ** oraociei.dll NO puede ser añadido al repositorio debido a su tamaño.
 
 Desde el cmd utilizar: set TNS_ADMIN= \La\ruta\que\corresponda\para\dar\con\la\carpeta\Wallet
 
 Dentro de la carpeta Wallet, en el archivo sqlnet.ora verifique la ruta del WALLET_LOCATION (debe coincidir con la ruta utilizada en el TNS_ADMIN)
 
-Asegurese de tener instalado:
+Instalar:
 -pip install oracledb
 -pip install python-decouple
 -pip install requests
@@ -23,10 +26,8 @@ Asegurese de tener instalado:
 
 *Recuerda activar entorno virtual
 
-### NOTA: Existe un error de Oracle "ORA-01804" asociado con la falta de archivos relacionados con la zona horaria que puede llegar a ocurrir, la version utilizada del Instant Client ya no trae dicho archivo. Se desconoce como solucionar dicho error a no ser que en el equipo hayan existido con anterioridad los archivos que se solicitan.
 
-
-#### Proyecto
+# 2.- Proyecto
 Este proyecto corresponde a una tienda de videojuegos desarrollada en Django, que debiera incluir:
 
 - Autenticación personalizada con modelo de usuario conectado a base de datos Oracle
@@ -35,7 +36,7 @@ Este proyecto corresponde a una tienda de videojuegos desarrollada en Django, qu
 - API propia y consumo de API externa
 - Interfaz moderna y responsiva con Bootstrap
 
-##### 📁 Estructura del Proyecto
+# 3.- 📁 Estructura del Proyecto
 
 TiendaWeb/
 ├── instantclient_23_7/
@@ -60,7 +61,8 @@ TiendaWeb/
 │   ├── admin.py 
 │   ├── apps.py             
 │   ├── forms.py              
-│   ├── models.py                      
+│   ├── models.py
+│   ├── serializers.py                        
 │   ├── tests.py                     
 │   ├── urls.py                      
 │   └── views.py
@@ -85,7 +87,52 @@ TiendaWeb/
 │   └── truststore.jks                      
 ├── db.sqlite3                       
 ├── manage.py                         
-└── README.md                         # Documentación del proyecto
+├── script_tablas.sql   
+└── datos_iniciales.json      
+
+# 4.- API y Postman
+
+a.- Instalar Postman
+b.- Nuevo (" + ")
+c.- Obtener el Token de Acceso:
+URL: http://localhost:8000/api/token/ 
+Método: POST
+Cuerpo (Body):
+{
+  "correo": "correo_de_usuario",
+  "password": "contraseña"
+}
+
+#### USADO
+{
+  "correo": adminprueba@correo.com,
+  "password": Contraseña2!
+}
+
+Si el Token es generado correctamente:
+{
+  "token": "tu_token_de_acceso"
+}
+
+#### EN ESTE CASO
+{
+  "token": d3658638e9bd0f57cb5abd362944f17ba7d3fcab
+}
+
+d.- Usar el Token de Acceso:
+Método: GET o POST (dependiendo)
+
+URL: url/api/correspondiente
+
+Encabezados (Headers):
+Authorization: Token "tu_token_de_acceso"
+
+#### EN ESTE CASO 
+
+URL: http://localhost:8000/api/productos/ o URL: http://localhost:8000/api/categorias/
+
+Authorization: Token d3658638e9bd0f57cb5abd362944f17ba7d3fcab
+
 
 
 

@@ -11,6 +11,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 from .models import Usuario, Producto, Categoria
+from .serializers import ProductoSerializer, CategoriaSerializer
 from .forms import RegistroUsuarioForm, ProductoForm, PerfilUsuarioForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 import requests
@@ -318,41 +319,31 @@ class CustomAuthToken(ObtainAuthToken):
         return Response({'token': token.key})
 
 
-
-@api_view(['GET'])
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
 # API para productos
+@api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def api_productos(request):
-    productos = Producto.objects.select_related('categoria').all()
-    
-    data = []
-    for producto in productos:
-        data.append({
-            'id': producto.id_producto,
-            'nombre': producto.nombre,
-            'precio': float(producto.precio),
-            'categoria': producto.categoria.nombre,
-        })
-    
-    return Response(data)
+    if request.method == 'GET':
+        productos = Producto.objects.select_related('categoria').all()
+        serializer = ProductoSerializer(productos, many=True)
+        return Response(serializer.data)
 
+    elif request.method == 'POST':
+        serializer = ProductoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
+# API para categorías
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
-# API para categorías
 def api_categorias(request):
     categorias = Categoria.objects.all()
-    
-    data = []
-    for categoria in categorias:
-        data.append({
-            'id': categoria.id_categoria,
-            'nombre': categoria.nombre,
-        })
-    
-    return Response(data)
+    serializer = CategoriaSerializer(categorias, many=True)
+    return Response(serializer.data)
 
 # REDIRECCION
 @login_required

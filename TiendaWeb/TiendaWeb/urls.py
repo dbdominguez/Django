@@ -72,6 +72,7 @@ urlpatterns = [
     path('api/ofertas/', views.ofertas_juegos_api_externa, name='ofertas_juegos_api_externa'),
     path('api/productos/lista/', views.productos_api_lista, name='productos_api_lista'),
     path('perfil/redirect/', views.redireccionar_perfil, name='redireccionar_perfil'),
+    
 
 
     # Gestión de usuarios
