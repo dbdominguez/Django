@@ -1,6 +1,7 @@
 # 🎮 TiendaWeb - Proyecto Django
 
 Link Repositorio GIT: https://github.com/dbdominguez/Django.git
+Link Presentacion: https://drive.google.com/file/d/1bgjxLszyQhPtFy9V2z-yH4yfBVvvZdvE/view?usp=sharing
 
 ## INDICE
 1.-Aclaracion
