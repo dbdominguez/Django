@@ -95,10 +95,14 @@ TiendaWeb/
 a.- Instalar Postman
 b.- Nuevo (" + ")
 c.- Obtener el Token de Acceso:
-URL: http://localhost:8000/api/token/ 
+URL: http://127.0.0.1:8000/api/token/
 Método: POST
 Cuerpo (Body):
-{
+x-www-form-urlencoded
+
+- "Key" : "Value"
+
+{  
   "correo": "correo_de_usuario",
   "password": "contraseña"
 }
@@ -125,11 +129,14 @@ Método: GET o POST (dependiendo)
 URL: url/api/correspondiente
 
 Encabezados (Headers):
+
+- "Key" : "Value"
 Authorization: Token "tu_token_de_acceso"
 
 #### EN ESTE CASO 
 
-URL: http://localhost:8000/api/productos/ o URL: http://localhost:8000/api/categorias/
+URL: http://127.0.0.1:8000/api/productos/ o URL: http://127.0.0.1:8000/api/categorias/
+
 
 Authorization: Token d3658638e9bd0f57cb5abd362944f17ba7d3fcab
 
